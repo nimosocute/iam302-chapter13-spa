@@ -1,0 +1,14 @@
+{
+  "capturedAt": "2026-11-02T21:20:27.5671572+07:00",
+  "keys": {
+    "ethernet0.startConnected": "FALSE",
+    "sharedFolder0.writeAccess": "FALSE",
+    "sharedFolder1.present": "FALSE",
+    "sharedFolder1.enabled": "FALSE",
+    "sharedFolder1.writeAccess": "FALSE",
+    "sharedFolder2.present": "FALSE",
+    "sharedFolder2.enabled": "FALSE",
+    "sharedFolder2.writeAccess": "FALSE",
+    "sharedFolder.maxNum": "1"
+  }
+}

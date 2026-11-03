@@ -1,0 +1,122 @@
+{
+  "metadata": {
+    "title": "Ma trận Kiểm định Bằng chứng & Khoảng trống Chứng minh (Verification Matrix)",
+    "target": "Practical Malware Analysis - Chapter 13 Labs (Lab13-01, Lab13-02, Lab13-03)",
+    "total_claims_audited": 11,
+    "audit_status": "Post-run audit: static/runtime/GUI coverage distinguished",
+    "updated_at": "2026-11-02T21:16:27.086610+07:00",
+    "gui_complete_claim": false
+  },
+  "claims": [
+    {
+      "id": "VM-01-01",
+      "sampleId": "lab13-01",
+      "type": "static",
+      "claim": "Resource 101 chứa 32 bytes dữ liệu được giải mã XOR với khóa 0x3B thành C2 URL: www.practicalmalwareanalysis.com",
+      "current_proof": "EVID-02/03 XOR loop; static_summary.json raw Resource 101 -> domain.",
+      "gap": "Chưa có ảnh GUI raw resource hoặc bộ nhớ sau giải mã.",
+      "priority": "HIGH",
+      "status": "verified_static_gui_partial"
+    },
+    {
+      "id": "VM-01-02",
+      "sampleId": "lab13-01",
+      "type": "static",
+      "claim": "Bảng mã Base64 trong Lab13-01.exe là bảng alphabet chuẩn A-Za-z0-9+/ đặt tại VA 0x004050e8",
+      "current_proof": "EVID-30 hiển thị đầu alphabet; static_summary.json có đủ 64 byte.",
+      "gap": "Ảnh 30 không hiển thị trọn bảng 64 ký tự.",
+      "priority": "MEDIUM",
+      "status": "verified_static_gui_partial"
+    },
+    {
+      "id": "VM-01-03",
+      "sampleId": "lab13-01",
+      "type": "static",
+      "claim": "Vòng lặp main beacon gửi HTTP mỗi 30 giây (Sleep 30000ms) và kiểm tra byte đầu response bằng 'o' (0x6F) để kết thúc tiến trình",
+      "current_proof": "EVID-28 Sleep500/30000; EVID-31 Buffer[0]==111.",
+      "gap": "",
+      "priority": "HIGH",
+      "status": "verified_static_gui"
+    },
+    {
+      "id": "VM-01-04",
+      "sampleId": "lab13-01",
+      "type": "runtime",
+      "claim": "Chuỗi URI path REVTS1RPUC1WNVZD là mã hóa Base64 chuẩn của 12 ký tự hostname DESKTOP-V5VC",
+      "current_proof": "EVID-09/32 URI; base64 offline REVTS1RPUC1WNVZD -> DESKTOP-V5VC.",
+      "gap": "Chưa chụp Burp Decoder; phép giải mã ngoại tuyến không phải ảnh GUI.",
+      "priority": "HIGH",
+      "status": "verified_runtime_offline_decode"
+    },
+    {
+      "id": "VM-01-05",
+      "sampleId": "lab13-01",
+      "type": "runtime",
+      "claim": "Nhận 'o', ngủ30s cuối, WSACleanup/return0; không xóa mẫu.",
+      "current_proof": "EVID-32 body o; EVID-37 PID4992 Exit0; CSV + forced=false, delta30.0210184s.",
+      "gap": "",
+      "priority": "LOW",
+      "status": "verified_runtime"
+    },
+    {
+      "id": "VM-02-01",
+      "sampleId": "lab13-02",
+      "type": "static",
+      "claim": "main Sleep5000; capture/encrypt/write; Sleep5000; lặp. Hai WriteFile cùngPID cách10.2218796s.",
+      "current_proof": "EVID-33 hai Sleep5000; EVID-38 PID3876 WriteFile delta10.2218796s.",
+      "gap": "",
+      "priority": "HIGH",
+      "status": "verified_static_and_runtime"
+    },
+    {
+      "id": "VM-02-02",
+      "sampleId": "lab13-02",
+      "type": "static",
+      "claim": "Khởi tạo ngữ cảnh Rabbit Stream Cipher kích thước 68 bytes (0x44) về 0 (Zero-state, không chạy Key Schedule)",
+      "current_proof": "EVID-34 memset68B zero trước sub_401739; assembly/decoder đối chiếu.",
+      "gap": "",
+      "priority": "HIGH",
+      "status": "verified_static_gui"
+    },
+    {
+      "id": "VM-02-03",
+      "sampleId": "lab13-02",
+      "type": "static",
+      "claim": "Hằng số Counter 1295307613 hiển thị ở hệ thập phân tương ứng hằng số biến thể 0x4D34D35D ở hệ thập lục phân (Hex)",
+      "current_proof": "EVID-12 decimal1295307613; raw binary/assembly =0x4D34D35D.",
+      "gap": "Chưa có ảnh GUI đổi hằng số sang hex.",
+      "priority": "MEDIUM",
+      "status": "verified_static_gui_partial"
+    },
+    {
+      "id": "VM-03-01",
+      "sampleId": "lab13-03",
+      "type": "static",
+      "claim": "Bảng mã Base64 trong Lab13-03.exe là Custom Base64 dịch chuyển 2 vị trí (bắt đầu bằng ký tự 'C') đặt tại VA 0x004120a4",
+      "current_proof": "EVID-36 byte43h + toàn bộ phần alphabet còn lại tại0x4120A4.",
+      "gap": "",
+      "priority": "HIGH",
+      "status": "verified_static_gui"
+    },
+    {
+      "id": "VM-03-02",
+      "sampleId": "lab13-03",
+      "type": "static",
+      "claim": "Lab13-03.exe sử dụng thuật toán mã hóa khối (Block/CBC cipher) với hàm sub_40352D và khóa 16-byte",
+      "current_proof": "EVID-35 CBC XOR/core/feedback; crypto-audit key, Sbox và initial IV.",
+      "gap": "Chưa có ciphertext runtime.",
+      "priority": "MEDIUM",
+      "status": "verified_static_gui"
+    },
+    {
+      "id": "VM-03-03",
+      "sampleId": "lab13-03",
+      "type": "runtime",
+      "claim": "Lệnh điều khiển nhận từ socket C2 được đưa vào pipe stdin của cmd.exe và thực thi thành công",
+      "current_proof": "PID5672 connect8910/cmd1296/receive28B; cipher capture0B.",
+      "gap": "Không chứng minh giải mã, ghi stdin, thực thi marker hoặc AES outbound.",
+      "priority": "LOW",
+      "status": "not_verified_runtime"
+    }
+  ]
+}

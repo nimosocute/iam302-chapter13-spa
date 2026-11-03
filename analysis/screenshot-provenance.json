@@ -1,0 +1,300 @@
+{
+  "method": "Direct PIL ImageGrab host full-screen PNG, VMware maximized with real guest tool windows; no crop, compositing, or annotations",
+  "captureDimensions": [
+    2560,
+    1600
+  ],
+  "capturedFileTimeMeaning": "Filesystem modification time of original PNG; not an independent trusted timestamp",
+  "authorshipLimit": "Tool screenshots document VM states, not proof of manual student operation",
+  "count": 36,
+  "images": [
+    {
+      "path": "evidence/02-ida-lab01-xor3b.png",
+      "sha256": "d3db843d692e49495b11c61004f11f195ae9467ddc7a6246cb30679e5bccbb15",
+      "bytes": 376917,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T17:35:08.652250+07:00"
+    },
+    {
+      "path": "evidence/03-ida-lab01-decompiler-xor.png",
+      "sha256": "2a8b4b78ab932df2619cdbd88170610c79578e3b34487dbb372d92ff219048e9",
+      "bytes": 369601,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T17:40:00.263308+07:00"
+    },
+    {
+      "path": "evidence/04-ida-lab01-http-hostname.png",
+      "sha256": "eb9d8504b23f991f3999cae647449c8e92fb94de74e0308fb07625ffc82c7d37",
+      "bytes": 379103,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T17:40:01.692611+07:00"
+    },
+    {
+      "path": "evidence/05-procmon-process-filter.png",
+      "sha256": "f495efb382dcdbf24162978de98aced03c6efe5b05fe470ab724c995d7ffc80f",
+      "bytes": 256515,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T17:44:46.090923+07:00"
+    },
+    {
+      "path": "evidence/06-procmon-lab02-runtime.png",
+      "sha256": "b5b1842720861cbc8f1cf263eb8e9d7b3b61ba93094dec44faf79c300fda8186",
+      "bytes": 461978,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T17:45:04.252808+07:00"
+    },
+    {
+      "path": "evidence/07-procmon-lab02-writefile.png",
+      "sha256": "2aa9cc3a8a6f25a2299bbccec2af1c9a91e198eef7d359fb9f81ec31692fc84b",
+      "bytes": 474415,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T17:45:59.259229+07:00"
+    },
+    {
+      "path": "evidence/08-procmon-lab02-writefile-filtered.png",
+      "sha256": "9fc770b7c9bd9638647688d810ed8b7377b307312c3920cb8bdf6bd19f1ccd49",
+      "bytes": 236635,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T17:52:58.573495+07:00"
+    },
+    {
+      "path": "evidence/09-burp-lab01-http-request.png",
+      "sha256": "a55883e07b0790291493f6299aaeb24eab12b2009e08d2b0a50806592d2b40eb",
+      "bytes": 275836,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T17:59:07.100524+07:00"
+    },
+    {
+      "path": "evidence/10-ida-lab02-screen-capture.png",
+      "sha256": "4bb2ddee5785e06b519c84729c804131047d0b98da6c1855e11927578c5f2b96",
+      "bytes": 390208,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T18:10:02.246517+07:00"
+    },
+    {
+      "path": "evidence/11-ida-lab02-encrypt-write.png",
+      "sha256": "894daebed618699994716f8a56d0043eacb890cd08e203500e72c9a37d3402f6",
+      "bytes": 344767,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T18:10:27.605354+07:00"
+    },
+    {
+      "path": "evidence/12-ida-lab02-rabbit-constants.png",
+      "sha256": "1096e555642f7131673f76ffba2226a903456382d527d829f835f364dedf01c2",
+      "bytes": 386817,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T18:10:29.852100+07:00"
+    },
+    {
+      "path": "evidence/13-ida-lab03-c2-connect.png",
+      "sha256": "5c92b7a04ddee8ef04b104d10da450971aadc2531bd0efcaec38a032a6ec12ab",
+      "bytes": 379958,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T18:12:19.911003+07:00"
+    },
+    {
+      "path": "evidence/14-ida-lab03-pipes-cmd.png",
+      "sha256": "78956046f3e4e68689f6c012192cb9444aeb3d53bb40253f4525f80f81dbfbdd",
+      "bytes": 394741,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T18:12:50.351657+07:00"
+    },
+    {
+      "path": "evidence/15-ida-lab03-outbound-encryption.png",
+      "sha256": "b2b7c6d4cc9ffd47b96dd22092e9ff329d9c91b1e2f4665ea2201e407bfb3b34",
+      "bytes": 389850,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T18:12:52.573581+07:00"
+    },
+    {
+      "path": "evidence/16-ida-lab03-inbound-decode.png",
+      "sha256": "a5d351c46310a6aaccf247c27bee38cb2ec918d1a90aed92a556097e170b47af",
+      "bytes": 379546,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T18:12:54.807165+07:00"
+    },
+    {
+      "path": "evidence/18-procmon-lab03-cmd-child.png",
+      "sha256": "94117e9b64db2e8e8435170668683fcfe0f7c1097b4dfc9167baecd9d8b3cccd",
+      "bytes": 243690,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T18:15:45.445141+07:00"
+    },
+    {
+      "path": "evidence/19-hxd-lab02-encrypted-file.png",
+      "sha256": "2db0656d6c58c98d3bd2783a5b0d191a2d2e4ebab49f9e605349d24972c5db5c",
+      "bytes": 1202906,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T18:16:51.052877+07:00"
+    },
+    {
+      "path": "evidence/20-hxd-lab02-decrypted-bmp.png",
+      "sha256": "8ce6fc3cba6b16356e0bfea9588ed6746ca8d8e1a843baa829f4c76ed3f4b70f",
+      "bytes": 986466,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T18:19:17.562392+07:00"
+    },
+    {
+      "path": "evidence/21-paint-lab02-recovered-screen.png",
+      "sha256": "0f4fae373ed28536ff659d1ee703815d41c332845d2a0966cb6c21aab9216db8",
+      "bytes": 366074,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T18:18:15.779134+07:00"
+    },
+    {
+      "path": "evidence/22-procmon-cmd-process-properties.png",
+      "sha256": "5f6ea40258dfee0e7326491e6e7b76e85520ede9cb67f7f4c2b49eaaa623b537",
+      "bytes": 442717,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T18:30:39.660222+07:00"
+    },
+    {
+      "path": "evidence/23-hashmyfiles-samples.png",
+      "sha256": "3e3e3d51c4439935b3dc395b641da9b66c780e9e8ca0dcd14e05b81ecb270778",
+      "bytes": 354515,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T18:26:32.853908+07:00"
+    },
+    {
+      "path": "evidence/24-processhacker-live-lab03.png",
+      "sha256": "e6cc607b803a871763256ebb2c020dbbccf6670eddcc510ac1f66e02246fe1aa",
+      "bytes": 284244,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T18:25:10.818888+07:00"
+    },
+    {
+      "path": "evidence/25-processhacker-live-tcp8910.png",
+      "sha256": "4840322253116104c9497be0481aa86c684ec8b25b68c807a9e975b1a82bad82",
+      "bytes": 243799,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T18:28:20.937233+07:00"
+    },
+    {
+      "path": "evidence/26-ida-lab03-createpipes.png",
+      "sha256": "c81b8cf634c137fcefbc6238417a2b731a23f3375e956c230221da93a1625f7e",
+      "bytes": 381224,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T18:39:31.037951+07:00"
+    },
+    {
+      "path": "evidence/27-ida-lab03-redirect-createprocess.png",
+      "sha256": "20b2b4927ee52d41ebf758210713dd4cdd26314a0905a7ccb91dc79bf5b60737",
+      "bytes": 393745,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T18:40:08.020500+07:00"
+    },
+    {
+      "path": "evidence/28-ida-lab01-loop-exit-delay.png",
+      "sha256": "8480dc1a8071e4b247c58150f2222ead46c31d6b21ccc8ddd9a1bacbb8e15651",
+      "bytes": 310042,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T20:30:26.704072+07:00"
+    },
+    {
+      "path": "evidence/29-ida-lab01-response-o.png",
+      "sha256": "be5139a119aa36ae04be2ce02ddbed463306bfd2812c6ecb09f1dccdde16e7f5",
+      "bytes": 364528,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T20:31:04.997878+07:00"
+    },
+    {
+      "path": "evidence/30-ida-lab01-base64-alphabet.png",
+      "sha256": "1d09b8677f7f582211bf46ea4b09869cb06db4d3d62e254af956d33d033a2675",
+      "bytes": 380736,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T20:31:07.218176+07:00"
+    },
+    {
+      "path": "evidence/31-ida-lab01-response-o-comparison.png",
+      "sha256": "0c71ef9b8a5a0ae6e60261f6668808222f00261e7579e2858431c464bb128882",
+      "bytes": 337099,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T20:32:19.480162+07:00"
+    },
+    {
+      "path": "evidence/32-burp-lab01-response-o.png",
+      "sha256": "549c743ca9eeda975bfcfb2e891bf89b02ac0cf9b461704bd92f9409bb712440",
+      "bytes": 230100,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T20:37:39.669897+07:00"
+    },
+    {
+      "path": "evidence/33-ida-lab02-sleep5000.png",
+      "sha256": "52a75338b402819ba66f3d65ac0e20571d0474dcb3c80a46236fe3bc42e1990b",
+      "bytes": 278931,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T20:38:45.406303+07:00"
+    },
+    {
+      "path": "evidence/34-ida-lab02-zero-state.png",
+      "sha256": "9b2e53757f4b7ad2b8774ea886e1f800d223086c2aeb98550e87b8e4eb92f7d3",
+      "bytes": 276765,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T20:39:23.397784+07:00"
+    },
+    {
+      "path": "evidence/35-ida-lab03-cbc-feedback.png",
+      "sha256": "68102abe84b6931b1852d0fb1c6e71deea2cc14fc5240f1cfe3034be4bd74f6c",
+      "bytes": 365050,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T20:40:42.110394+07:00"
+    },
+    {
+      "path": "evidence/36-ida-lab03-custom-base64.png",
+      "sha256": "64400c5e9289eac2e53a2d96342abcb66b0accb36d1e9f8247e20d75c33b25a2",
+      "bytes": 431025,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T20:41:28.027220+07:00"
+    },
+    {
+      "path": "evidence/37-procmon-lab01-natural-exit.png",
+      "sha256": "ae91eeb91a42d3532c669585ec16db9b129f8c8fe27b510a7d0d4a68b73f4d03",
+      "bytes": 232148,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T20:48:38.335636+07:00"
+    },
+    {
+      "path": "evidence/38-procmon-lab02-ten-second-interval.png",
+      "sha256": "6f4d51c21c53c022d8f71c351fced2cd0210706113ec0dab2b1e37e64fc4e250",
+      "bytes": 219873,
+      "width": 2560,
+      "height": 1600,
+      "capturedFileTime": "2026-11-02T20:50:49.444191+07:00"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+[
+    {
+        "Name":  "Lab13-01.exe",
+        "ProcessId":  5012,
+        "ParentProcessId":  5860,
+        "CommandLine":  "\"C:\\Lab13Analysis\\samples\\Lab13-01.exe\" "
+    },
+    {
+        "Name":  "Lab13-03.exe",
+        "ProcessId":  4336,
+        "ParentProcessId":  5860,
+        "CommandLine":  "\"C:\\Lab13Analysis\\samples\\Lab13-03.exe\" "
+    },
+    {
+        "Name":  "conhost.exe",
+        "ProcessId":  712,
+        "ParentProcessId":  4336,
+        "CommandLine":  "\\??\\C:\\Windows\\system32\\conhost.exe 0x4"
+    },
+    {
+        "Name":  "cmd.exe",
+        "ProcessId":  4532,
+        "ParentProcessId":  4336,
+        "CommandLine":  "cmd.exe"
+    }
+]

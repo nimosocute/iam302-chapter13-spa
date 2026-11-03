@@ -1,0 +1,13 @@
+folders: 
+  - enabled: true
+    expiration: 0
+    followSymlinks: false
+    guestName: share
+    hostDefaultCase: false
+    hostPath: 'D:\FPT University\FA26\IAM302\share'
+    label: sharedFolder0
+    present: true
+    readAccess: true
+    redirect: 0
+    tags: ''
+    writeAccess: false

@@ -1,0 +1,97 @@
+{
+  "verifiedAt": "2026-11-03T12:00:40.711870+07:00",
+  "samples": [
+    {
+      "sample": "Lab13-01.exe",
+      "bytes": 32768,
+      "sha256": "71a295247ba7419f9f9dea8098e6867182bb80f53c98eb0f59192a6557a51249",
+      "md5": "a9a2734d080e3ae0f5ada35e878da7c8",
+      "arch": "PE32x86",
+      "subsystem": 3
+    },
+    {
+      "sample": "Lab13-02.exe",
+      "bytes": 32768,
+      "sha256": "598f21f1e6f4d5829ba8cfba19d361e09de510493df8472a605f46dbf7927030",
+      "md5": "b65c4d7cbc4069ddbff665370201e588",
+      "arch": "PE32x86",
+      "subsystem": 3
+    },
+    {
+      "sample": "Lab13-03.exe",
+      "bytes": 77824,
+      "sha256": "86054002565c929215b82615477652d24379b9119bc33ef7f41706ee7e125379",
+      "md5": "98ea0fe0594f0f373d9791886a01db8c",
+      "arch": "PE32x86",
+      "subsystem": 3
+    }
+  ],
+  "acceptedScreenshots": 36,
+  "screenshotDimensions": [
+    2560,
+    1600
+  ],
+  "allGalleryReferencesExistAndHashesMatch": true,
+  "executableSamplesIncluded": false,
+  "procmonSavedEvents": {
+    "firstRun": 5479,
+    "verificationRun": 4724
+  },
+  "offlineUI": {
+    "modalChecks": 36,
+    "externalRequests": 0,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "mobileWidth": 390,
+    "log": "analysis/qa-final-results.txt",
+    "readingSteps": 20,
+    "canonicalInlineImages": 36,
+    "inlineModalTabChecks": 4,
+    "contextJumpChecks": 36,
+    "responsiveTabs": 8,
+    "responsiveViewports": [
+      [
+        1600,
+        900
+      ],
+      [
+        768,
+        1024
+      ],
+      [
+        390,
+        844
+      ]
+    ],
+    "transcript": "TRANSCRIPT.md"
+  },
+  "runtimeCoverage": "partial_runtime_coverage",
+  "Lab13-01": "Natural exit0 after local response o; receive-to-exit30.0210184s",
+  "Lab13-02": "WriteFile delta10.2218796s; decrypted1507x90632bpp5461422B",
+  "Lab13-03": "Connection/cmdchild/TCPReceive28B observed; outbound0B; echo/AES runtime not verified",
+  "finalGuestCleanup": "Hosts/proxy restored; sample/observer absent; controller stopped; original share write denied",
+  "shareCaveat": "Temporary entries disabled in runtimeConfig/VMX; guest still sees Lab13Transfer cached path; writable share existed during verification",
+  "missingGUI": [
+    "raw Resource101",
+    "full standard Base64 alphabet in one image",
+    "Burp Decoder hostname",
+    "Rabbit constant converted to hex"
+  ],
+  "scope": "Uncropped real VMware GUI PNGs, static byte checks, guest runtime logs, offline artifact/UI QA; not manual student authorship or external C2 proof",
+  "readingExperience": {
+    "order": [
+      "Bắt đầu",
+      "Lab13-01.exe",
+      "Lab13-02.exe",
+      "Lab13-03.exe",
+      "Kết luận & IOC"
+    ],
+    "pattern": "explanation, full uncropped evidence image, reading guidance, observation, conclusion",
+    "gallery": "secondary index only; each entry links back to its reading position",
+    "narrationMatchesReadingSteps": 20,
+    "originalEvidenceHashesUnchanged": true,
+    "vmAccessDuringUIRevision": false,
+    "desktopInputDuringUIRevision": false,
+    "browserQA": "headless Edge; no visible browser or host/guest mouse control"
+  }
+}

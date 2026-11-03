@@ -1,0 +1,27 @@
+﻿{
+    "adapters":  [
+                     {
+                         "Name":  "Ethernet0",
+                         "Status":  "Disconnected"
+                     }
+                 ],
+    "observer":  5448,
+    "procmon":  "C:\\Tools\\Procmon\\Procmon64.exe",
+    "listeners":  [
+                      {
+                          "LocalAddress":  "::",
+                          "LocalPort":  8080,
+                          "OwningProcess":  1416
+                      },
+                      {
+                          "LocalAddress":  "127.0.0.1",
+                          "LocalPort":  8910,
+                          "OwningProcess":  5448
+                      },
+                      {
+                          "LocalAddress":  "127.0.0.1",
+                          "LocalPort":  80,
+                          "OwningProcess":  5448
+                      }
+                  ]
+}

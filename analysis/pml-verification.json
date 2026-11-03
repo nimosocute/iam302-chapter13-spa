@@ -1,0 +1,37 @@
+{
+  "path": "artifacts/Lab13-filtered.pml",
+  "bytes": 2597511,
+  "sha256": "28d3af7e14fa4ba4a313e459e5d13683c7ea825202c9b812fe243249128d409f",
+  "header": {
+    "magic": "PML_",
+    "version": 9,
+    "eventCountOffset": "0x234",
+    "eventCount": 5479
+  },
+  "literalStringEncodingsFound": {
+    "Lab13-01.exe": [
+      "utf-16-le",
+      "ascii"
+    ],
+    "Lab13-02.exe": [
+      "utf-16-le",
+      "ascii"
+    ],
+    "Lab13-03.exe": [
+      "utf-16-le",
+      "ascii"
+    ],
+    "cmd.exe": [
+      "utf-16-le",
+      "ascii"
+    ],
+    "conhost.exe": [
+      "utf-16-le",
+      "ascii"
+    ],
+    "temp002a9d1e": [
+      "ascii"
+    ]
+  },
+  "limits": "Header count and literal strings verified read-only, not full decoding of every PML event. GUI total5592 included113 events excluded by filter; saved file contains5479 only."
+}

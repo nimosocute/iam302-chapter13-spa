@@ -1,0 +1,41 @@
+{
+  "verifiedAt": "2026-11-02T21:30:41.555801+07:00",
+  "method": "Read-only bytes from guest-extracted .exe.bin copies; no host execution",
+  "samples": [
+    {
+      "sample": "Lab13-01.exe",
+      "bytes": 32768,
+      "sha256": "71a295247ba7419f9f9dea8098e6867182bb80f53c98eb0f59192a6557a51249",
+      "md5": "a9a2734d080e3ae0f5ada35e878da7c8",
+      "arch": "PE32x86",
+      "subsystem": 3
+    },
+    {
+      "sample": "Lab13-02.exe",
+      "bytes": 32768,
+      "sha256": "598f21f1e6f4d5829ba8cfba19d361e09de510493df8472a605f46dbf7927030",
+      "md5": "b65c4d7cbc4069ddbff665370201e588",
+      "arch": "PE32x86",
+      "subsystem": 3
+    },
+    {
+      "sample": "Lab13-03.exe",
+      "bytes": 77824,
+      "sha256": "86054002565c929215b82615477652d24379b9119bc33ef7f41706ee7e125379",
+      "md5": "98ea0fe0594f0f373d9791886a01db8c",
+      "arch": "PE32x86",
+      "subsystem": 3
+    }
+  ],
+  "checks": {
+    "resource101XOR3b": true,
+    "standardBase64table64bytes": true,
+    "modifiedRabbitCounters": true,
+    "twoPushSleep5000": true,
+    "customBase64table64bytes": true,
+    "AESkey16bytes": true,
+    "AESsboxPrefix16bytes": true,
+    "initialIV16zeroVirtualSectionTail": true
+  },
+  "limits": "Static byte/metadata verification; not runtime crypto or API trace proof"
+}

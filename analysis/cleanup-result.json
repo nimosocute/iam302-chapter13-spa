@@ -1,0 +1,23 @@
+﻿{
+    "time":  "2026-11-02T18:37:43.7069517+07:00",
+    "sampleProcessesStopped":  [
+                                   null
+                               ],
+    "observerProcessesStopped":  [
+                                     1936
+                                 ],
+    "remainingLabProcesses":  [
+
+                              ],
+    "hostsRestoredByteExact":  true,
+    "proxyRestored":  true,
+    "adapters":  [
+                     {
+                         "Name":  "Ethernet0",
+                         "Status":  "Disconnected"
+                     }
+                 ],
+    "labListeners":  [
+
+                     ]
+}

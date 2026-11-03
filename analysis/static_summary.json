@@ -1,0 +1,880 @@
+{
+  "Lab13-01": {
+    "filename": "Lab13-01.exe.bin",
+    "size": 32768,
+    "md5": "a9a2734d080e3ae0f5ada35e878da7c8",
+    "sha256": "71a295247ba7419f9f9dea8098e6867182bb80f53c98eb0f59192a6557a51249",
+    "entry_point": "0x1681",
+    "image_base": "0x400000",
+    "imports": {
+      "KERNEL32.dll": [
+        {
+          "name": "LockResource",
+          "address": "0x405000"
+        },
+        {
+          "name": "LoadResource",
+          "address": "0x405004"
+        },
+        {
+          "name": "GlobalAlloc",
+          "address": "0x405008"
+        },
+        {
+          "name": "SizeofResource",
+          "address": "0x40500c"
+        },
+        {
+          "name": "FindResourceA",
+          "address": "0x405010"
+        },
+        {
+          "name": "GetModuleHandleA",
+          "address": "0x405014"
+        },
+        {
+          "name": "Sleep",
+          "address": "0x405018"
+        },
+        {
+          "name": "GetStringTypeW",
+          "address": "0x40501c"
+        },
+        {
+          "name": "GetStringTypeA",
+          "address": "0x405020"
+        },
+        {
+          "name": "LCMapStringW",
+          "address": "0x405024"
+        },
+        {
+          "name": "LCMapStringA",
+          "address": "0x405028"
+        },
+        {
+          "name": "MultiByteToWideChar",
+          "address": "0x40502c"
+        },
+        {
+          "name": "FlushFileBuffers",
+          "address": "0x405030"
+        },
+        {
+          "name": "SetStdHandle",
+          "address": "0x405034"
+        },
+        {
+          "name": "LoadLibraryA",
+          "address": "0x405038"
+        },
+        {
+          "name": "GetProcAddress",
+          "address": "0x40503c"
+        },
+        {
+          "name": "GetCommandLineA",
+          "address": "0x405040"
+        },
+        {
+          "name": "GetVersion",
+          "address": "0x405044"
+        },
+        {
+          "name": "ExitProcess",
+          "address": "0x405048"
+        },
+        {
+          "name": "TerminateProcess",
+          "address": "0x40504c"
+        },
+        {
+          "name": "GetCurrentProcess",
+          "address": "0x405050"
+        },
+        {
+          "name": "UnhandledExceptionFilter",
+          "address": "0x405054"
+        },
+        {
+          "name": "GetModuleFileNameA",
+          "address": "0x405058"
+        },
+        {
+          "name": "FreeEnvironmentStringsA",
+          "address": "0x40505c"
+        },
+        {
+          "name": "FreeEnvironmentStringsW",
+          "address": "0x405060"
+        },
+        {
+          "name": "WideCharToMultiByte",
+          "address": "0x405064"
+        },
+        {
+          "name": "GetEnvironmentStrings",
+          "address": "0x405068"
+        },
+        {
+          "name": "GetEnvironmentStringsW",
+          "address": "0x40506c"
+        },
+        {
+          "name": "SetHandleCount",
+          "address": "0x405070"
+        },
+        {
+          "name": "GetStdHandle",
+          "address": "0x405074"
+        },
+        {
+          "name": "GetFileType",
+          "address": "0x405078"
+        },
+        {
+          "name": "GetStartupInfoA",
+          "address": "0x40507c"
+        },
+        {
+          "name": "HeapDestroy",
+          "address": "0x405080"
+        },
+        {
+          "name": "HeapCreate",
+          "address": "0x405084"
+        },
+        {
+          "name": "VirtualFree",
+          "address": "0x405088"
+        },
+        {
+          "name": "HeapFree",
+          "address": "0x40508c"
+        },
+        {
+          "name": "RtlUnwind",
+          "address": "0x405090"
+        },
+        {
+          "name": "WriteFile",
+          "address": "0x405094"
+        },
+        {
+          "name": "GetLastError",
+          "address": "0x405098"
+        },
+        {
+          "name": "SetFilePointer",
+          "address": "0x40509c"
+        },
+        {
+          "name": "HeapAlloc",
+          "address": "0x4050a0"
+        },
+        {
+          "name": "GetCPInfo",
+          "address": "0x4050a4"
+        },
+        {
+          "name": "GetACP",
+          "address": "0x4050a8"
+        },
+        {
+          "name": "GetOEMCP",
+          "address": "0x4050ac"
+        },
+        {
+          "name": "VirtualAlloc",
+          "address": "0x4050b0"
+        },
+        {
+          "name": "HeapReAlloc",
+          "address": "0x4050b4"
+        },
+        {
+          "name": "CloseHandle",
+          "address": "0x4050b8"
+        }
+      ],
+      "WS2_32.dll": [
+        {
+          "name": "WSACleanup",
+          "address": "0x4050d4"
+        },
+        {
+          "name": "gethostname",
+          "address": "0x4050d8"
+        },
+        {
+          "name": "WSAStartup",
+          "address": "0x4050dc"
+        }
+      ],
+      "WININET.dll": [
+        {
+          "name": "InternetOpenA",
+          "address": "0x4050c0"
+        },
+        {
+          "name": "InternetOpenUrlA",
+          "address": "0x4050c4"
+        },
+        {
+          "name": "InternetCloseHandle",
+          "address": "0x4050c8"
+        },
+        {
+          "name": "InternetReadFile",
+          "address": "0x4050cc"
+        }
+      ]
+    },
+    "sections": [
+      {
+        "name": ".text",
+        "va": "0x1000",
+        "vsize": "0x3ff6",
+        "raw_size": "0x4000"
+      },
+      {
+        "name": ".rdata",
+        "va": "0x5000",
+        "vsize": "0x9d0",
+        "raw_size": "0x1000"
+      },
+      {
+        "name": ".data",
+        "va": "0x6000",
+        "vsize": "0x1e68",
+        "raw_size": "0x1000"
+      },
+      {
+        "name": ".rsrc",
+        "va": "0x8000",
+        "vsize": "0x80",
+        "raw_size": "0x1000"
+      }
+    ],
+    "details": {
+      "resource_101_xor_key": "0x3b",
+      "resource_101_ciphertext_hex": "4c4c4c154b495a584f52585a57565a574c5a495e5a555a574248524815585456",
+      "resource_101_decrypted_url": "www.practicalmalwareanalysis.com",
+      "b64_table_va": "0x004050e8",
+      "b64_table": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
+      "critical_functions": {
+        "sub_401300": "Load resource 101, allocate buffer, call XOR decrypt",
+        "sub_401190": "Single-byte XOR decryption loop (key=0x3B)",
+        "sub_4010b1": "Base64 encode buffer in 3-byte blocks",
+        "sub_401000": "Base64 index calculation & lookup against standard alphabet",
+        "sub_4011c9": "Harvest hostname via gethostname, encode via base64, construct http://%s/%s/ URL, send HTTP GET beacon via WinINet, check response byte 0 == 0x6f (o)",
+        "sub_4013ed": "Sleep(500), beacon, unconditional Sleep(30000), then test result and exit on response byte o"
+      },
+      "hostname_truncation": "strncpy Count12 at call0x401216; explicit null at offset12; Base64 actual string length",
+      "exit_condition": "Sleep(30000) runs unconditionally after beacon; if response first byte == 0x6F (o), exits after sleep",
+      "xor_write_instruction": "0x004011c1: mov [ecx], al"
+    },
+    "subsystem": "IMAGE_SUBSYSTEM_WINDOWS_CUI (3) - Windows Console"
+  },
+  "Lab13-02": {
+    "filename": "Lab13-02.exe.bin",
+    "size": 32768,
+    "md5": "b65c4d7cbc4069ddbff665370201e588",
+    "sha256": "598f21f1e6f4d5829ba8cfba19d361e09de510493df8472a605f46dbf7927030",
+    "entry_point": "0x1d3a",
+    "image_base": "0x400000",
+    "imports": {
+      "KERNEL32.dll": [
+        {
+          "name": "GetStringTypeW",
+          "address": "0x406024"
+        },
+        {
+          "name": "Sleep",
+          "address": "0x406028"
+        },
+        {
+          "name": "LCMapStringW",
+          "address": "0x40602c"
+        },
+        {
+          "name": "LCMapStringA",
+          "address": "0x406030"
+        },
+        {
+          "name": "MultiByteToWideChar",
+          "address": "0x406034"
+        },
+        {
+          "name": "GetTickCount",
+          "address": "0x406038"
+        },
+        {
+          "name": "GlobalAlloc",
+          "address": "0x40603c"
+        },
+        {
+          "name": "GlobalLock",
+          "address": "0x406040"
+        },
+        {
+          "name": "GlobalUnlock",
+          "address": "0x406044"
+        },
+        {
+          "name": "GlobalFree",
+          "address": "0x406048"
+        },
+        {
+          "name": "CreateFileA",
+          "address": "0x40604c"
+        },
+        {
+          "name": "WriteFile",
+          "address": "0x406050"
+        },
+        {
+          "name": "GetStringTypeA",
+          "address": "0x406054"
+        },
+        {
+          "name": "CloseHandle",
+          "address": "0x406058"
+        },
+        {
+          "name": "GetCommandLineA",
+          "address": "0x40605c"
+        },
+        {
+          "name": "GetVersion",
+          "address": "0x406060"
+        },
+        {
+          "name": "ExitProcess",
+          "address": "0x406064"
+        },
+        {
+          "name": "TerminateProcess",
+          "address": "0x406068"
+        },
+        {
+          "name": "GetCurrentProcess",
+          "address": "0x40606c"
+        },
+        {
+          "name": "UnhandledExceptionFilter",
+          "address": "0x406070"
+        },
+        {
+          "name": "GetModuleFileNameA",
+          "address": "0x406074"
+        },
+        {
+          "name": "FreeEnvironmentStringsA",
+          "address": "0x406078"
+        },
+        {
+          "name": "FreeEnvironmentStringsW",
+          "address": "0x40607c"
+        },
+        {
+          "name": "WideCharToMultiByte",
+          "address": "0x406080"
+        },
+        {
+          "name": "GetEnvironmentStrings",
+          "address": "0x406084"
+        },
+        {
+          "name": "GetEnvironmentStringsW",
+          "address": "0x406088"
+        },
+        {
+          "name": "SetHandleCount",
+          "address": "0x40608c"
+        },
+        {
+          "name": "GetStdHandle",
+          "address": "0x406090"
+        },
+        {
+          "name": "GetFileType",
+          "address": "0x406094"
+        },
+        {
+          "name": "GetStartupInfoA",
+          "address": "0x406098"
+        },
+        {
+          "name": "HeapDestroy",
+          "address": "0x40609c"
+        },
+        {
+          "name": "HeapCreate",
+          "address": "0x4060a0"
+        },
+        {
+          "name": "VirtualFree",
+          "address": "0x4060a4"
+        },
+        {
+          "name": "HeapFree",
+          "address": "0x4060a8"
+        },
+        {
+          "name": "RtlUnwind",
+          "address": "0x4060ac"
+        },
+        {
+          "name": "GetLastError",
+          "address": "0x4060b0"
+        },
+        {
+          "name": "SetFilePointer",
+          "address": "0x4060b4"
+        },
+        {
+          "name": "HeapAlloc",
+          "address": "0x4060b8"
+        },
+        {
+          "name": "GetCPInfo",
+          "address": "0x4060bc"
+        },
+        {
+          "name": "GetACP",
+          "address": "0x4060c0"
+        },
+        {
+          "name": "GetOEMCP",
+          "address": "0x4060c4"
+        },
+        {
+          "name": "VirtualAlloc",
+          "address": "0x4060c8"
+        },
+        {
+          "name": "HeapReAlloc",
+          "address": "0x4060cc"
+        },
+        {
+          "name": "GetProcAddress",
+          "address": "0x4060d0"
+        },
+        {
+          "name": "LoadLibraryA",
+          "address": "0x4060d4"
+        },
+        {
+          "name": "SetStdHandle",
+          "address": "0x4060d8"
+        },
+        {
+          "name": "FlushFileBuffers",
+          "address": "0x4060dc"
+        }
+      ],
+      "USER32.dll": [
+        {
+          "name": "GetDesktopWindow",
+          "address": "0x4060e4"
+        },
+        {
+          "name": "GetDC",
+          "address": "0x4060e8"
+        },
+        {
+          "name": "ReleaseDC",
+          "address": "0x4060ec"
+        },
+        {
+          "name": "GetSystemMetrics",
+          "address": "0x4060f0"
+        }
+      ],
+      "GDI32.dll": [
+        {
+          "name": "CreateCompatibleBitmap",
+          "address": "0x406000"
+        },
+        {
+          "name": "SelectObject",
+          "address": "0x406004"
+        },
+        {
+          "name": "BitBlt",
+          "address": "0x406008"
+        },
+        {
+          "name": "GetObjectA",
+          "address": "0x40600c"
+        },
+        {
+          "name": "GetDIBits",
+          "address": "0x406010"
+        },
+        {
+          "name": "DeleteDC",
+          "address": "0x406014"
+        },
+        {
+          "name": "DeleteObject",
+          "address": "0x406018"
+        },
+        {
+          "name": "CreateCompatibleDC",
+          "address": "0x40601c"
+        }
+      ]
+    },
+    "sections": [
+      {
+        "name": ".text",
+        "va": "0x1000",
+        "vsize": "0x43e4",
+        "raw_size": "0x5000"
+      },
+      {
+        "name": ".rdata",
+        "va": "0x6000",
+        "vsize": "0xa0c",
+        "raw_size": "0x1000"
+      },
+      {
+        "name": ".data",
+        "va": "0x7000",
+        "vsize": "0x1e1c",
+        "raw_size": "0x1000"
+      }
+    ],
+    "details": {
+      "magic_constants": [
+        "0x4d34d35d",
+        "0xd34d34d3 (-0x2cb2cb2d)",
+        "0x34d34d34"
+      ],
+      "crypto_algorithm": "Rabbit-derived stream cipher; modified counter 0x4D34D35D, zero68-byte state without key schedule/warmup",
+      "key_initialization": "Internal state 68 bytes (0x44) memset to 0x00; no key schedule or warmup",
+      "output_file_format": "temp%08x (GetTickCount hex value)",
+      "payload_type": "In-memory GDI Screen Capture (Desktop HDC -> CreateCompatibleBitmap -> BitBlt -> GetDIBits -> Rabbit Encrypted -> Written to disk)",
+      "critical_functions": {
+        "sub_4018d8": "Infinite loop Sleep5000; capture/encrypt/write; Sleep5000; repeat. Consecutive WriteFile observed10.2218796s.",
+        "sub_401851": "Capture screen, encrypt bitmap buffer, format filename with GetTickCount, write to file",
+        "sub_401070": "GDI capture function using GetDesktopWindow, CreateCompatibleDC, BitBlt",
+        "sub_40181f": "Rabbit cipher wrapper zeroing 0x44-byte context and executing cipher",
+        "sub_401739": "Rabbit block XOR encryption processing 16-byte chunks",
+        "sub_4012dd": "Rabbit next-state update function with constant additions and carries",
+        "sub_401000": "CreateFileA and WriteFile routine for temp%08x artifact"
+      },
+      "output_location": "Current Working Directory (CWD)",
+      "runtime_artifact": "temp002a9d1e (5,436,114 bytes) decrypted to valid BMP 1505x903",
+      "remainder_handling": "Sub_401739 XORs 16-byte blocks including remainder; WriteFile writes original 5,436,114 bytes"
+    },
+    "subsystem": "IMAGE_SUBSYSTEM_WINDOWS_CUI (3) - Windows Console"
+  },
+  "Lab13-03": {
+    "filename": "Lab13-03.exe.bin",
+    "size": 77824,
+    "md5": "98ea0fe0594f0f373d9791886a01db8c",
+    "sha256": "86054002565c929215b82615477652d24379b9119bc33ef7f41706ee7e125379",
+    "entry_point": "0x69bf",
+    "image_base": "0x400000",
+    "imports": {
+      "KERNEL32.dll": [
+        {
+          "name": "ExitProcess",
+          "address": "0x40c000"
+        },
+        {
+          "name": "LocalFree",
+          "address": "0x40c004"
+        },
+        {
+          "name": "WriteConsoleA",
+          "address": "0x40c008"
+        },
+        {
+          "name": "GetStdHandle",
+          "address": "0x40c00c"
+        },
+        {
+          "name": "lstrlenA",
+          "address": "0x40c010"
+        },
+        {
+          "name": "FormatMessageA",
+          "address": "0x40c014"
+        },
+        {
+          "name": "GetLastError",
+          "address": "0x40c018"
+        },
+        {
+          "name": "WriteFile",
+          "address": "0x40c01c"
+        },
+        {
+          "name": "ReadFile",
+          "address": "0x40c020"
+        },
+        {
+          "name": "WaitForSingleObject",
+          "address": "0x40c024"
+        },
+        {
+          "name": "CreateThread",
+          "address": "0x40c028"
+        },
+        {
+          "name": "CreateProcessA",
+          "address": "0x40c02c"
+        },
+        {
+          "name": "CloseHandle",
+          "address": "0x40c030"
+        },
+        {
+          "name": "DuplicateHandle",
+          "address": "0x40c034"
+        },
+        {
+          "name": "GetCurrentProcess",
+          "address": "0x40c038"
+        },
+        {
+          "name": "CreatePipe",
+          "address": "0x40c03c"
+        },
+        {
+          "name": "GetStringTypeW",
+          "address": "0x40c040"
+        },
+        {
+          "name": "GetStringTypeA",
+          "address": "0x40c044"
+        },
+        {
+          "name": "LCMapStringW",
+          "address": "0x40c048"
+        },
+        {
+          "name": "LCMapStringA",
+          "address": "0x40c04c"
+        },
+        {
+          "name": "SetStdHandle",
+          "address": "0x40c050"
+        },
+        {
+          "name": "LoadLibraryA",
+          "address": "0x40c054"
+        },
+        {
+          "name": "GetProcAddress",
+          "address": "0x40c058"
+        },
+        {
+          "name": "GetOEMCP",
+          "address": "0x40c05c"
+        },
+        {
+          "name": "MultiByteToWideChar",
+          "address": "0x40c060"
+        },
+        {
+          "name": "RaiseException",
+          "address": "0x40c064"
+        },
+        {
+          "name": "GetCommandLineA",
+          "address": "0x40c068"
+        },
+        {
+          "name": "GetVersion",
+          "address": "0x40c06c"
+        },
+        {
+          "name": "RtlUnwind",
+          "address": "0x40c070"
+        },
+        {
+          "name": "HeapFree",
+          "address": "0x40c074"
+        },
+        {
+          "name": "TerminateProcess",
+          "address": "0x40c078"
+        },
+        {
+          "name": "HeapReAlloc",
+          "address": "0x40c07c"
+        },
+        {
+          "name": "HeapAlloc",
+          "address": "0x40c080"
+        },
+        {
+          "name": "HeapSize",
+          "address": "0x40c084"
+        },
+        {
+          "name": "SetUnhandledExceptionFilter",
+          "address": "0x40c088"
+        },
+        {
+          "name": "UnhandledExceptionFilter",
+          "address": "0x40c08c"
+        },
+        {
+          "name": "GetModuleFileNameA",
+          "address": "0x40c090"
+        },
+        {
+          "name": "FreeEnvironmentStringsA",
+          "address": "0x40c094"
+        },
+        {
+          "name": "FreeEnvironmentStringsW",
+          "address": "0x40c098"
+        },
+        {
+          "name": "WideCharToMultiByte",
+          "address": "0x40c09c"
+        },
+        {
+          "name": "GetEnvironmentStrings",
+          "address": "0x40c0a0"
+        },
+        {
+          "name": "GetEnvironmentStringsW",
+          "address": "0x40c0a4"
+        },
+        {
+          "name": "SetHandleCount",
+          "address": "0x40c0a8"
+        },
+        {
+          "name": "GetFileType",
+          "address": "0x40c0ac"
+        },
+        {
+          "name": "GetStartupInfoA",
+          "address": "0x40c0b0"
+        },
+        {
+          "name": "HeapDestroy",
+          "address": "0x40c0b4"
+        },
+        {
+          "name": "HeapCreate",
+          "address": "0x40c0b8"
+        },
+        {
+          "name": "VirtualFree",
+          "address": "0x40c0bc"
+        },
+        {
+          "name": "SetFilePointer",
+          "address": "0x40c0c0"
+        },
+        {
+          "name": "FlushFileBuffers",
+          "address": "0x40c0c4"
+        },
+        {
+          "name": "VirtualAlloc",
+          "address": "0x40c0c8"
+        },
+        {
+          "name": "IsBadWritePtr",
+          "address": "0x40c0cc"
+        },
+        {
+          "name": "IsBadReadPtr",
+          "address": "0x40c0d0"
+        },
+        {
+          "name": "IsBadCodePtr",
+          "address": "0x40c0d4"
+        },
+        {
+          "name": "GetCPInfo",
+          "address": "0x40c0d8"
+        },
+        {
+          "name": "GetACP",
+          "address": "0x40c0dc"
+        }
+      ],
+      "USER32.dll": [
+        {
+          "name": "wsprintfA",
+          "address": "0x40c0e4"
+        }
+      ],
+      "WS2_32.dll": [
+        {
+          "name": "htons",
+          "address": "0x40c0ec"
+        },
+        {
+          "name": "connect",
+          "address": "0x40c0f0"
+        },
+        {
+          "name": "gethostbyname",
+          "address": "0x40c0f4"
+        },
+        {
+          "name": "WSASocketA",
+          "address": "0x40c0f8"
+        },
+        {
+          "name": "WSAStartup",
+          "address": "0x40c0fc"
+        }
+      ]
+    },
+    "sections": [
+      {
+        "name": ".text",
+        "va": "0x1000",
+        "vsize": "0xae5e",
+        "raw_size": "0xb000"
+      },
+      {
+        "name": ".rdata",
+        "va": "0xc000",
+        "vsize": "0x54ce",
+        "raw_size": "0x6000"
+      },
+      {
+        "name": ".data",
+        "va": "0x12000",
+        "vsize": "0x2d68",
+        "raw_size": "0x1000"
+      }
+    ],
+    "details": {
+      "c2_hostname": "www.practicalmalwareanalysis.com",
+      "c2_port": 8910,
+      "c2_port_hex": "0x22ce (htons)",
+      "cbc_key": "ijklmnopqrstuvwx",
+      "cbc_key_va": "0x00412208",
+      "payload_type": "Reverse Shell Backdoor (Socket redirection to cmd.exe via CreatePipe & DuplicateHandle)",
+      "critical_functions": {
+        "sub_401879": "Main socket setup: WSAStartup, WSASocketA, gethostbyname, htons(0x22ce), connect to C2",
+        "sub_4015b7": "CreatePipe x2, DuplicateHandle, spawn cmd.exe with redirected std handles, launch C2 loop",
+        "sub_401ac2": "Custom crypto / state init using key ijklmnopqrstuvwx",
+        "sub_40132b": "Outbound worker: stdout pipe ReadFile, AES-128-CBC encrypt, socket WriteFile",
+        "sub_40147c": "Inbound worker: socket ReadFile, custom Base64 decode, stdin pipe WriteFile"
+      },
+      "channels": {
+        "inbound": "Thread 0x0040147c: ReadFile socket -> Custom Base64 decode (báº£ng xoay trÃ¡i 2 táº¡i VA 0x004120a4) -> WriteFile stdin cmd.exe",
+        "outbound": "Thread 0x0040132b: ReadFile stdout cmd.exe -> AES-128-CBC encrypt (key ijklmnopqrstuvwx táº¡i VA 0x00412208) -> WriteFile socket C2"
+      },
+      "iv": "Zero16 at VA0x00413374; init once, feedback at ctx+0x3F4 persists between outbound calls; static finding only"
+    },
+    "subsystem": "IMAGE_SUBSYSTEM_WINDOWS_CUI (3) - Windows Console"
+  }
+}

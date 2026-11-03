@@ -1,0 +1,120 @@
+{
+  "generated_at": "2026-11-02T21:28:08.103659+07:00",
+  "overall_runtime_status": "partial_runtime_coverage",
+  "assertions_passed": true,
+  "sha256_trace": {
+    "http-o.jsonl": "53bee2e7eda235ba681984dd35d1e4236f338af448154c3247ca19d61ff1652a",
+    "lab01-exit.json": "dbb5c8c0452ffcab5e94d6e4777483d193272b3b42ab99f8af338eb9da1c3142",
+    "lab02-allfiles.json": "a2b073269759e5cfecc93f51e32798b1731820ba2f134b302a19d014ac273316",
+    "lab02-files2.json": "ec08704ec657bfe9521d0bb30d48212862932b0f0333049195cc7c113cd463f5",
+    "lab02-run2.json": "04b21ef643ebaca42f6815e1a58683c79d767478ed064cbd7ba64eef99b22219",
+    "lab03-run.json": "d2b4ce8ae22935f131d3ea064e255c36117c68a480079e3a4f3a873ce37c2b9f",
+    "lab03-verify-cipher.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "recovered-verify.bmp": "346e137d42f4f540bc06a813a44111cdb8fd144f4630ec71dacbdcf1d20b45cc",
+    "tcp8910.jsonl": "da103bf9e64fc51da3b5bcb8e7c4298e9561de7b13b301541e0fe76c82c8684d",
+    "temp00ca77b9.enc": "a866891a4a26733327f73afb70c53dccaed23946ba1d678ad8dd85a92754eba1",
+    "verify-all.pml": "626065d1be7c314167ba6eb823008c61f31cfedd3a6480aa80ea0e899031c6ab",
+    "verify-preflight.json": "f48f5376be103c2c7aeac903e4845d858253999d17dba48b7b564bd63182a68a",
+    "verify-runtime.csv": "29ce7926cdf57d692b1cf39d130157ff173c97219b2fdd521cb10169bf0880ac"
+  },
+  "csv_row_indexes": {
+    "lab01_tcp_receive": 2647,
+    "lab01_process_exit": 2718,
+    "lab02_write_1": 3271,
+    "lab02_write_2": 3274,
+    "lab03_child_cmd_create": 4237,
+    "lab03_tcp_receive_28b": 4650
+  },
+  "samples": {
+    "Lab13-01.exe": {
+      "pid": 4992,
+      "exit_status": 0,
+      "csv_tcp_receive_row": 2647,
+      "csv_process_exit_row": 2718,
+      "tcp_receive_time": "8:36:59.0024594 PM",
+      "process_exit_time": "8:37:29.0234778 PM",
+      "sleep_interval_seconds": 30.0210184,
+      "server_response_hex": "6f",
+      "request_path": "/REVTS1RPUC1WNVZD/",
+      "encoding_scheme": "Resource domain: XOR0x3B; separate hostname12byte: standard Base64, no hostname XOR",
+      "exit_mechanism": "Sleep(30000) unconditional wait in main; invokes WSACleanup() and returns 0 (no direct ExitProcess call in main)",
+      "verification_status": "VERIFIED_PASS"
+    },
+    "Lab13-02.exe": {
+      "pid": 3876,
+      "csv_write_rows": [
+        3271,
+        3274
+      ],
+      "written_files": [
+        {
+          "file": "temp00ca77b9",
+          "row": 3271,
+          "time": "8:39:31.7045111 PM",
+          "bytes": 5461422
+        },
+        {
+          "file": "temp00ca9fb4",
+          "row": 3274,
+          "time": "8:39:41.9263907 PM",
+          "bytes": 5461422
+        }
+      ],
+      "target_directory": "C:\\Lab13Analysis\\verify\\captures (CWD, NOT %TEMP%)",
+      "write_interval_seconds": 10.2218796,
+      "cipher_algorithm": "Rabbit-derived stream cipher (constant 0x4D34D35D, 68-byte state), NOT simple XOR",
+      "cycle_mechanism": "Two consecutive Sleep(5000) calls (pre-capture and post-capture) resulting in >=10s interval",
+      "overhead_note": "Delta ~0.222s represents aggregate overhead (GDI BitBlt capture, Rabbit encryption, file I/O, OS scheduling); overhead not solely GDI provable",
+      "recovered_bmp_dimensions": "1507x906 32bpp (5,461,422 bytes)",
+      "verification_status": "VERIFIED_PASS"
+    },
+    "Lab13-03.exe": {
+      "pid": 5672,
+      "child_processes": [
+        {
+          "name": "conhost.exe",
+          "pid": 5608
+        },
+        {
+          "name": "cmd.exe",
+          "pid": 1296,
+          "csv_create_row": 4237
+        }
+      ],
+      "c2_connection": {
+        "local_port": 49777,
+        "remote_port": 8910,
+        "state": "Established"
+      },
+      "cryptography_architecture": {
+        "inbound": "Custom Base64 with custom alphabet mapping (NOT shellcode, NOT Substituted XOR)",
+        "outbound": "AES-128-CBC implemented in sample functions; static identification only"
+      },
+      "inbound_network_payload": {
+        "csv_receive_row": 4650,
+        "wire_ascii": "BYPqdaDOSWKzO19YTXLLTmnHTC0M",
+        "wire_length": 28,
+        "offline_plaintext": "echo LAB13_VERIFIED\r\n",
+        "offline_plaintext_bytes": 21,
+        "status": "RECEIVED_AS_NETWORK_PAYLOAD_ONLY",
+        "note": "No independent runtime evidence of payload decoding or cmd.exe execution"
+      },
+      "outbound_echo_verification": {
+        "captured_length_bytes": 0,
+        "test_status": "FAILED_ECHO_TEST",
+        "failure_cause": "UNKNOWN (pipe buffering / flush timing hypothesized; 4096-byte buffering unproven at runtime)",
+        "impact": "Socket connection and child creation observed; architecture inferred statically; no command execution or outbound AES runtime proof"
+      },
+      "verification_status": "PARTIAL_COVERAGE"
+    }
+  },
+  "assert_checks": {
+    "source_csv_sha256_matches": true,
+    "lab01_natural_exit_status0_delay30s": true,
+    "lab02_two_cwd_writes_delta10_2218796s": true,
+    "lab02_recovered_bmp_header1507x906_32bpp": true,
+    "lab03_cmd_child_pid1296_and_tcp_receive28b": true,
+    "lab03_capture_is_empty_not_success": true
+  },
+  "check_scope": "Artifact assertions only; static algorithm descriptions are not runtime execution assertions."
+}

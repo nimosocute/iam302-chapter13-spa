@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Báo cáo Phân tích Mã độc - Chapter 13 (Data Encoding) | IAM302</title>
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-secondary: #111827;
+      --bg-card: #1f2937;
+      --bg-card-hover: #283548;
+      --border-color: #374151;
+      --text-primary: #f9fafb;
+      --text-secondary: #c1cbd8;
+      --text-muted: #a0aec0;
+      --accent-cyan: #06b6d4;
+      --accent-cyan-glow: rgba(6, 182, 212, 0.15);
+      --accent-red: #ef4444;
+      --accent-green: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-blue: #3b82f6;
+      --accent-purple: #8b5cf6;
+      --code-bg: #030712;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      overflow-x: clip;
+      max-width: 100vw;
+    }
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: linear-gradient(180deg, #131c2e 0%, #0e1524 100%);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .brand { display: flex; align-items: center; gap: 0.875rem; }
+    .badge-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #0284c7, #06b6d4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: #fff;
+      box-shadow: 0 0 15px var(--accent-cyan-glow);
+    }
+    .brand-title h1 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.01em;
+    }
+    .brand-title p {
+      font-size: 0.825rem;
+      color: var(--accent-cyan);
+      font-weight: 500;
+    }
+    .header-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+    .pill {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .pill-green {
+      border-color: rgba(16, 185, 129, 0.4);
+      background: rgba(16, 185, 129, 0.1);
+      color: #34d399;
+    }
+    .pill-cyan {
+      border-color: rgba(6, 182, 212, 0.4);
+      background: rgba(6, 182, 212, 0.1);
+      color: #38bdf8;
+    }
+    .pill-amber {
+      border-color: rgba(245, 158, 11, 0.4);
+      background: rgba(245, 158, 11, 0.1);
+      color: #fbbf24;
+    }
+    .pill-purple {
+      border-color: rgba(139, 92, 246, 0.4);
+      background: rgba(139, 92, 246, 0.1);
+      color: #c084fc;
+    }
+    .nav-bar {
+      background: #0d131f;
+      border-bottom: 1px solid var(--border-color);
+      overflow-x: auto;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+    .nav-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      gap: 0.25rem;
+    }
+    .nav-tab {
+      background: none;
+      border: none;
+      outline: none;
+      padding: 0.85rem 1.15rem;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .nav-tab:hover, .nav-tab:focus-visible {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.03);
+      outline: 2px solid var(--accent-cyan);
+      outline-offset: -2px;
+    }
+    .nav-tab.active {
+      color: var(--accent-cyan);
+      border-bottom-color: var(--accent-cyan);
+      background: rgba(6, 182, 212, 0.05);
+    }
+    .nav-tab .tab-count {
+      font-size: 0.7rem;
+      background: var(--bg-card);
+      padding: 0.1rem 0.4rem;
+      border-radius: 9999px;
+      color: var(--text-muted);
+    }
+    .nav-tab.active .tab-count {
+      background: var(--accent-cyan);
+      color: #04121a;
+      font-weight: 700;
+    }
+    main {
+      flex: 1;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+    .tab-content { display: none; animation: fadeIn 0.25s ease-in-out; scroll-margin-top: 80px; }
+    .tab-content.active { display: block; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .section-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .section-desc {
+      color: var(--text-secondary);
+      font-size: 0.925rem;
+      margin-bottom: 1.5rem;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.25rem;
+      min-width: 0;
+      max-width: 100%;
+      box-sizing: border-box;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+    .card:hover { border-color: #4b5563; }
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.45rem 0;
+      font-size: 0.85rem;
+      border-bottom: 1px dashed rgba(55, 65, 81, 0.5);
+    }
+    .detail-row:last-child { border-bottom: none; }
+    .detail-label { color: var(--text-muted); font-weight: 500; }
+    .detail-value {
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      overflow-wrap: anywhere;
+      word-break: normal;
+      text-align: right;
+      max-width: 65%;
+      min-width: 0;
+    }
+    .callout {
+      background: rgba(17, 24, 39, 0.7);
+      border-left: 4px solid var(--accent-cyan);
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+    .callout-title {
+      font-weight: 700;
+      color: var(--accent-cyan);
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .callout-amber { border-left-color: var(--accent-amber); }
+    .callout-amber .callout-title { color: var(--accent-amber); }
+    .callout-green { border-left-color: var(--accent-green); }
+    .callout-green .callout-title { color: var(--accent-green); }
+    .callout-red { border-left-color: var(--accent-red); }
+    .callout-red .callout-title { color: var(--accent-red); }
+    .code-box {
+      background: var(--code-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.825rem;
+      color: #e5e7eb;
+      overflow-x: auto;
+      margin: 0.75rem 0;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      word-break: break-all;
+      min-width: 0;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    .table-container {
+      overflow-x: auto;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      margin: 1rem 0;
+      background: var(--bg-secondary);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.85rem;
+    }
+    th {
+      background: #151e2e;
+      color: var(--text-secondary);
+      font-weight: 600;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+    td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid rgba(55, 65, 81, 0.4);
+      color: var(--text-primary);
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255, 255, 255, 0.02); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1rem;
+    }
+    .gallery-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+      outline: none;
+    }
+    .gallery-card:hover, .gallery-card:focus-visible {
+      transform: translateY(-3px);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 8px 24px rgba(6, 182, 212, 0.15);
+      outline: 2px solid var(--accent-cyan);
+      outline-offset: 2px;
+    }
+    .gallery-thumb-wrap {
+      width: 100%;
+      height: 220px;
+      background: #000;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .gallery-thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+    .gallery-tool-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 0.3rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      background: rgba(11, 15, 25, 0.85);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
+    .gallery-tool-tag.ida { border-color: rgba(6, 182, 212, 0.5); color: #38bdf8; }
+    .gallery-tool-tag.procmon { border-color: rgba(16, 185, 129, 0.5); color: #34d399; }
+    .gallery-tool-tag.burp { border-color: rgba(245, 158, 11, 0.5); color: #fbbf24; }
+    .gallery-tool-tag.wireshark { border-color: rgba(59, 130, 246, 0.5); color: #60a5fa; }
+    .gallery-tool-tag.vm { border-color: rgba(139, 92, 246, 0.5); color: #a78bfa; }
+    .gallery-info {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .gallery-sample-badge {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      margin-bottom: 0.3rem;
+    }
+    .gallery-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.35;
+      margin-bottom: 0.5rem;
+    }
+    .gallery-desc {
+      font-size: 0.825rem;
+      color: var(--text-secondary);
+      line-height: 1.45;
+      flex: 1;
+    }
+    .gallery-footer {
+      margin-top: 0.75rem;
+      padding-top: 0.65rem;
+      border-top: 1px solid rgba(55, 65, 81, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--accent-cyan);
+    }
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .modal-overlay.open { display: flex; opacity: 1; }
+    .modal-dialog {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      max-width: 96vw;
+      max-height: 94vh;
+      width: 1400px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+    }
+    .modal-header {
+      padding: 0.85rem 1.25rem;
+      background: #151e2e;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .modal-title-wrap h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .modal-title-wrap p {
+      font-size: 0.775rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+    .modal-close-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+      line-height: 1;
+      transition: all 0.2s ease;
+    }
+    .modal-close-btn:hover {
+      background: var(--accent-red);
+      color: #fff;
+      border-color: var(--accent-red);
+    }
+    .modal-body {
+      flex: 1;
+      overflow: auto;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem;
+      position: relative;
+    }
+    .modal-body img {
+      max-width: 100%;
+      max-height: calc(94vh - 140px);
+      object-fit: contain;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+      transition: transform 0.2s ease;
+    }
+    .modal-footer {
+      padding: 0.85rem 1.25rem;
+      background: #111827;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.825rem;
+      color: var(--text-secondary);
+    }
+    .modal-footer-desc { flex: 1; color: var(--text-primary); }
+    .modal-zoom-controls { display: flex; gap: 0.5rem; }
+    .btn-small {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.775rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .btn-small:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent-cyan);
+    }
+    .flow-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin: 1rem 0;
+    }
+    .step-item {
+      display: flex;
+      gap: 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      align-items: flex-start;
+    }
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(6, 182, 212, 0.15);
+      border: 1px solid var(--accent-cyan);
+      color: var(--accent-cyan);
+      font-weight: 700;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    .step-content h4 {
+      font-size: 0.925rem;
+      color: #fff;
+      margin-bottom: 0.25rem;
+    }
+    .step-content p {
+      font-size: 0.825rem;
+      color: var(--text-secondary);
+    }
+    .findings-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .finding-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+    }
+    .finding-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.35rem;
+    }
+    .finding-title {
+      font-size: 0.925rem;
+      font-weight: 600;
+      color: #fff;
+    }
+    .finding-detail {
+      font-size: 0.825rem;
+      color: var(--text-secondary);
+    }
+    .reading-intro, .reading-index, .reading-step, .sample-conclusion, .page-navigation {
+      max-width: 1120px;
+      margin: 0 auto 1.5rem;
+    }
+    .reading-intro {
+      border-left: 3px solid var(--accent-cyan);
+      padding: 1rem 1.25rem;
+      background: var(--bg-secondary);
+    }
+    .reading-intro p { color: var(--text-secondary); margin-top: 0.4rem; }
+    .reading-index {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+    }
+    .reading-index h3 { font-size: 1rem; margin-bottom: 0.5rem; }
+    .reading-index ol { padding-left: 1.5rem; }
+    .reading-index li { padding: 0.3rem 0; }
+    .reading-index a, .page-navigation a, .gallery-context-link {
+      color: #7dd3fc;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .reading-step {
+      border-top: 1px solid var(--border-color);
+      padding-top: 1.5rem;
+      scroll-margin-top: 100px;
+      overflow-wrap: anywhere;
+    }
+    .reading-step h3 {
+      font-size: 1.3rem;
+      line-height: 1.4;
+      margin-bottom: 0.8rem;
+    }
+    .step-label {
+      color: #7dd3fc;
+      font: 600 0.8rem var(--font-mono);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.5rem;
+    }
+    .step-explanation {
+      max-width: 84ch;
+      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+      line-height: 1.85;
+    }
+    .inline-evidence {
+      margin: 0 0 1.5rem;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      background: var(--bg-secondary);
+      overflow: hidden;
+      scroll-margin-top: 80px;
+    }
+    .evidence-heading { padding: 1rem 1.25rem; }
+    .evidence-heading h4 { font-size: 1rem; margin-top: 0.4rem; line-height: 1.5; }
+    .evidence-meta { display: flex; flex-wrap: wrap; gap: 0.5rem; color: #c1cbd8; font-size: 0.8rem; }
+    .evidence-open {
+      display: block;
+      position: relative;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      background: #000;
+      color: #fff;
+      cursor: zoom-in;
+    }
+    .evidence-open img { display: block; width: 100%; height: auto; aspect-ratio: 8 / 5; object-fit: contain; }
+    .evidence-open span {
+      display: block;
+      padding: 0.5rem;
+      background: #152337;
+      font-size: 0.8rem;
+    }
+    .evidence-reading { padding: 1.1rem 1.25rem; font-size: 0.97rem; }
+    .evidence-reading p + p { margin-top: 0.65rem; }
+    .evidence-reading strong { color: #f8fafc; }
+    .evidence-reading p:last-child {
+      border-left: 3px solid #38bdf8;
+      padding-left: 0.85rem;
+      color: #d6edff;
+    }
+    .step-takeaway {
+      padding: 1rem 1.25rem;
+      background: #102634;
+      border: 1px solid #28607b;
+      border-radius: 8px;
+    }
+    .speaker-notes { margin-top: 0.8rem; color: var(--text-secondary); }
+    .speaker-notes summary, .technical-details > summary { cursor: pointer; padding: 0.75rem 0; color: #7dd3fc; }
+    .speaker-notes p { border-left: 2px solid var(--border-color); padding: 0.75rem 1rem; line-height: 1.85; }
+    .technical-details { max-width: 1120px; margin: 2rem auto; }
+    .technical-details > summary { font-weight: 600; font-size: 1rem; }
+    .technical-details .grid-2 { grid-template-columns: minmax(0, 1fr); }
+    .page-navigation { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding: 1rem 0; }
+    .page-navigation a { display: inline-flex; align-items: center; min-height: 44px; padding: 0.5rem; }
+    .gallery-context-link { display: block; margin-top: 0.65rem; }
+    .gallery-entry { min-width: 0; display: flex; flex-direction: column; }
+    .gallery-entry .gallery-card { flex: 1; }
+    .runtime-record { color: #fcd58a; margin-bottom: 1rem; }
+    .runtime-metrics { margin-bottom: 1rem; display: grid; gap: 0.5rem; }
+    .runtime-metrics div { padding: 0.8rem 1rem; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; }
+    .runtime-metrics dt { color: var(--text-muted); font-size: 0.85rem; }
+    .runtime-metrics dd { margin-top: 0.25rem; font-weight: 600; }
+    :focus-visible { outline: 3px solid #7dd3fc; outline-offset: 3px; }
+    .btn-small, .modal-close-btn { min-height: 44px; }
+    .modal-close-btn { min-width: 44px; }
+    @media (max-width: 768px) {
+      .reading-step h3 { font-size: 1.15rem; }
+      .reading-intro, .reading-index, .evidence-heading, .evidence-reading { padding: 1rem; }
+      .nav-tab { padding: 0.8rem; }
+      .step-explanation { font-size: 1rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
+    @media print {
+      body { background: #fff !important; color: #000 !important; }
+      header, .nav-bar, .modal-overlay, .btn-small { display: none !important; }
+      .tab-content { display: block !important; page-break-after: always; }
+      .card, .table-container, .gallery-card, .callout {
+        border-color: #ccc !important;
+        background: #fff !important;
+        color: #000 !important;
+        box-shadow: none !important;
+      }
+      .detail-value, .code-box { color: #000 !important; background: #f3f4f6 !important; }
+      .gallery-thumb-wrap { height: auto !important; }
+      .gallery-thumb-wrap img { max-height: 400px !important; object-fit: contain !important; }
+    }
+    @media (max-width: 768px) {
+      .header-inner { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+      .header-badges { flex-wrap: wrap; gap: 0.4rem; }
+      .grid-2, .grid-3, .gallery-grid { grid-template-columns: minmax(0, 1fr) !important; gap: 1rem; }
+      .grid-2 > *, .grid-3 > *, .gallery-grid > *, .card { min-width: 0 !important; max-width: 100% !important; box-sizing: border-box; }
+      .detail-row { flex-direction: column; gap: 0.25rem; min-width: 0; max-width: 100%; }
+      .detail-value { max-width: 100% !important; text-align: left; overflow-wrap: anywhere; word-break: normal; }
+      .code-box { overflow-x: auto; max-width: 100%; box-sizing: border-box; overflow-wrap: anywhere; word-break: break-all; }
+      main { padding: 1rem 0.5rem; }
+      .card { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="brand">
+        <div class="badge-icon" id="brand-folder-num">13</div>
+        <div class="brand-title">
+          <h1 id="app-title">Báo cáo Phân tích Mã độc Chapter 13: Data Encoding</h1>
+          <p id="app-subtitle">MSSV: 3 số cuối chia 22 dư 13 | Khóa IAM302 | Practical Malware Analysis</p>
+        </div>
+      </div>
+      <div class="header-badges">
+        <span class="pill pill-green" id="badge-vm">
+          <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+          VMware Win10 x64 · Mạng ngoài ngắt
+        </span>
+        <span class="pill pill-cyan" id="badge-tools">
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          IDA Pro • Burp • Procmon
+        </span>
+        <span class="pill pill-amber" id="badge-snapshot" title="Snapshot trước phân tích">Snapshot trước phân tích</span>
+      </div>
+    </div>
+  </header>
+  <nav class="nav-bar" aria-label="Điều hướng báo cáo">
+    <div class="nav-inner" id="nav-inner" role="tablist">
+      <button class="nav-tab active" data-tab="tab-overview" role="tab" aria-selected="true" id="tab-btn-overview"><span>Bắt đầu</span></button>
+      <button class="nav-tab" data-tab="tab-gallery" role="tab" aria-selected="false" id="tab-btn-gallery"><span>Chỉ mục ảnh (tra cứu thêm)</span><span class="tab-count" id="evidence-count">0</span></button>
+      <button class="nav-tab" data-tab="tab-iocs" role="tab" aria-selected="false" id="tab-btn-iocs"><span>Kết luận & IOC</span></button>
+      <button class="nav-tab" data-tab="tab-repro" role="tab" aria-selected="false" id="tab-btn-repro"><span>Quy trình & Giới hạn</span></button>
+      <button class="nav-tab" data-tab="tab-refs" role="tab" aria-selected="false" id="tab-btn-refs"><span>Tham khảo</span></button>
+    </div>
+  </nav>
+  <main>
+    <section id="tab-overview" class="tab-content active" role="tabpanel" aria-labelledby="tab-btn-overview">
+      <h2 class="section-title">Tổng quan Bài thực hành & Môi trường Kiểm thử</h2>
+      <p class="section-desc">Báo cáo đọc theo trình tự: cơ chế trong mã máy, ảnh công cụ ngay tại chỗ, hành vi đã quan sát và phần chưa xác nhận.</p>
+      <div class="reading-intro">
+        <strong>Chỉ cần theo dõi SPA này, không cần mở công cụ khác.</strong>
+        <p>Đề bài: lấy 3 số cuối MSSV chia dư cho 22. Số folder đã chọn là 13; báo cáo này phân tích ba mẫu trong Chapter_13L.</p>
+        <p>Đọc từ Bắt đầu, lần lượt Lab13-01, Lab13-02, Lab13-03 rồi kết luận. Mỗi ảnh có hướng dẫn đọc và kết luận riêng; bấm ảnh nếu cần phóng to. Chỉ mục ảnh là phần tra cứu phụ, không phải nơi phải tìm bằng chứng.</p>
+        <p>Khi chuẩn bị video, mở “Lời thuyết minh cho bước này” để xem đoạn nói tương ứng. Khi quay có thể thu gọn lời nói, chỉ giữ nội dung và bằng chứng trên SPA.</p>
+      </div>
+      <details class="technical-details">
+      <summary>Thông tin kỹ thuật môi trường và đường dẫn mẫu</summary>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-header"><span class="card-title">Quy tắc Phân bổ Mục tiêu</span><span class="pill pill-cyan" id="card-folder-pill">Folder #13</span></div>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">Công thức gán đề tài: <strong>(3 số cuối MSSV) % 22 = x</strong>. Mục tiêu tương ứng thư mục thực hành:</p>
+          <div class="code-box" id="overview-folder-path">BinaryCollection\Chapter_13L</div>
+          <p style="font-size: 0.8rem; color: var(--text-muted);" id="overview-samples-hint">Đã nạp và đối chiếu 3 mẫu mã độc (Lab13-01.exe, Lab13-02.exe, Lab13-03.exe).</p>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-title">Môi trường Phân tích</span><span class="pill pill-amber">Không air-gap</span></div>
+          <div class="detail-row"><span class="detail-label">Guest OS:</span><span class="detail-value" id="meta-os">Windows 10 Ent LTSC</span></div>
+          <div class="detail-row"><span class="detail-label">Hypervisor:</span><span class="detail-value" id="meta-hypervisor">VMware Workstation</span></div>
+          <div class="detail-row"><span class="detail-label">Chế độ Mạng:</span><span class="detail-value" id="meta-net">Isolated</span></div>
+          <div class="detail-row"><span class="detail-label">Snapshot Bảo vệ:</span><span class="detail-value" id="meta-snapshot" title="Snapshot trước phân tích">Snapshot trước phân tích</span></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-title">Bộ Công cụ Phân tích</span><span class="pill pill-amber">Chuyên nghiệp</span></div>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Giao diện đồ họa trực quan trên máy ảo VMware (GUI thật; có hỗ trợ tự động điều khiển/trích xuất; ảnh không chứng minh thao tác thủ công):</p>
+          <ul style="font-size: 0.825rem; color: var(--text-secondary); padding-left: 1.25rem;" id="overview-tools-list">
+            <li><strong>IDA Pro 9.4:</strong> Phân tích tĩnh, đồ thị luồng hàm x86 và Decompiler.</li>
+            <li><strong>Burp Suite Professional:</strong> Bắt, ghi nhận request HTTP GET beacon loopback.</li>
+            <li><strong>Process Monitor v3.96:</strong> Giám sát file hệ thống (WriteFile), tiến trình con cmd.exe.</li>
+            <li><strong>Process Hacker / HxD / Paint:</strong> Ghi nhận socket loopback TCP 8910 và kiểm chứng BMP.</li>
+          </ul>
+        </div>
+      </div>
+      </details>
+      <div class="callout callout-green">
+        <div class="callout-title">Minh chứng Thực tế trên Môi trường Máy ảo VMware</div>
+        <p style="color: var(--text-secondary); font-size: 0.875rem;" id="overview-integrity-note">
+          Bằng chứng được ghi nhận trực quan trên máy ảo Windows 10 x64 (GUI thật; có hỗ trợ tự động điều khiển/trích xuất; ảnh không chứng minh thao tác thủ công), thể hiện rõ giao diện công cụ chuyên nghiệp (IDA Pro, Procmon, Burp Suite Pro, Process Hacker, HxD), khung VMware Workstation và thanh tác vụ hệ thống.
+        </p>
+      </div>
+      <h3 style="font-size: 1.1rem; color: #fff; margin: 1.5rem 0 0.75rem 0;">Danh mục Các Mẫu Phân tích Trong Thư mục</h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>File Name</th><th>Kiến trúc</th><th>Kích thước</th><th>Trạng thái Phân tích</th><th>Vai trò / Mục tiêu Hoạt động</th>
+            </tr>
+          </thead>
+          <tbody id="overview-samples-table">
+            <tr><td colspan="5" style="text-align:center; color: var(--text-muted);">Đang tải dữ liệu mẫu từ report-data.js...</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="overview-evidence" id="overview-reading"></div>
+      <nav class="page-navigation" aria-label="Đọc tiếp">
+        <span></span><a href="#tab-sample-lab13-01">Đọc tiếp: Lab13-01 — Beacon HTTP</a>
+      </nav>
+    </section>
+    <div id="dynamic-samples-container"></div>
+    <section id="tab-gallery" class="tab-content" role="tabpanel" aria-labelledby="tab-btn-gallery">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+        <div>
+          <h2 class="section-title">Chỉ mục ảnh — Tra cứu bổ sung</h2>
+          <p class="section-desc" style="margin-bottom: 0;">Toàn bộ ảnh đã đặt đúng bước giải thích trong Bắt đầu và từng mẫu. Dùng chỉ mục này khi muốn lọc theo công cụ; mỗi ảnh có liên kết về đoạn phân tích tương ứng.</p>
+        </div>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;" id="gallery-filter-wrap">
+          <button class="btn-small filter-btn active" data-filter="all">Tất cả</button>
+        </div>
+      </div>
+      <div class="gallery-grid" id="gallery-container"></div>
+    </section>
+    <section id="tab-iocs" class="tab-content" role="tabpanel" aria-labelledby="tab-btn-iocs">
+      <h2 class="section-title">Kết luận chung & Dấu hiệu Nhận diện</h2>
+      <div class="reading-intro">
+        <p><strong>Lab13-01:</strong> Beacon HTTP mang hostname Base64; domain được giấu bằng XOR. Phản hồi o và việc tự thoát đã được đối chiếu.</p>
+        <p><strong>Lab13-02:</strong> Chụp desktop, mã hóa Rabbit biến thể, lưu tệp tại CWD khoảng mỗi 10 giây. Tệp ảnh được khôi phục và mở bằng Paint.</p>
+        <p><strong>Lab13-03:</strong> Kiến trúc reverse shell, inbound Custom Base64, outbound AES-128-CBC. Đã có cmd.exe và kết nối TCP; chưa chứng minh lệnh kiểm tra và AES outbound hoàn tất.</p>
+        <p>Domain, tên tệp hay cổng riêng lẻ chưa đủ kết luận trên một máy khác. Cần kết hợp mẫu tệp, quan hệ tiến trình, luồng dữ liệu và thời điểm sự kiện.</p>
+      </div>
+      <p class="section-desc">Tổng hợp các định danh mạng, domain C2, URL beacon, hash SHA256/MD5, mẫu tên tệp (filepattern temp%08x) và khóa giải mã / bảng ký tự trích xuất từ các mẫu.</p>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Loại IOC</th><th>Mẫu liên quan</th><th>Chỉ số / Giá trị (Indicator)</th><th>Ý nghĩa & Ngữ cảnh Phát hiện</th><th>Mức độ</th>
+            </tr>
+          </thead>
+          <tbody id="ioc-table-body">
+            <tr><td colspan="5" style="text-align: center; color: var(--text-muted);">Đang tải danh mục IOC...</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="yara-rules-section" style="margin-top: 1.5rem; display: none;">
+        <h3 style="font-size: 1.1rem; color: #fff; margin-bottom: 0.5rem;">Quy tắc Phát hiện (YARA / EDR Rules)</h3>
+        <div class="code-box" id="yara-rule-content"></div>
+      </div>
+    </section>
+    <section id="tab-repro" class="tab-content" role="tabpanel" aria-labelledby="tab-btn-repro">
+      <h2 class="section-title">Quy trình Tái lập & Giới hạn Kiểm thử</h2>
+      <p class="section-desc">Hướng dẫn các bước để kiểm chứng lại các phát hiện một cách an toàn và các ranh giới thực nghiệm cần lưu ý.</p>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header"><span class="card-title">Quy trình Tái lập trên Máy ảo</span><span class="pill pill-green">Step-by-step</span></div>
+          <div class="flow-steps" id="repro-steps-container">
+            <p style="color: var(--text-muted); font-size: 0.85rem;">Đang tải các bước tái lập...</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-title">Giới hạn Thực nghiệm & Ranh giới An toàn</span><span class="pill pill-amber">Safety Boundaries</span></div>
+          <ul style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; padding-left: 1.25rem;" id="limitations-container">
+            <li>Đang tải giới hạn thực nghiệm...</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 1.5rem;">
+        <div class="card-header">
+          <span class="card-title">Tệp Trích xuất & Kiểm chứng Ngoại tuyến (Extracted Artifacts)</span>
+          <span class="pill pill-cyan">Offline Files</span>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
+          Các tệp nhị phân, dữ liệu giải mã và log thực nghiệm trích xuất từ quá trình phân tích phục vụ kiểm chứng độc lập. <strong style="color: var(--accent-amber);">(Lưu ý: Tệp trích xuất phục vụ kiểm chứng kỹ thuật, KHÔNG PHẢI ảnh chụp bằng chứng toàn màn hình máy ảo full-VM evidence)</strong>:
+        </p>
+        <ul style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.8; padding-left: 1.25rem;">
+          <li>
+            <a href="artifacts/recovered.png" target="_blank" style="color: var(--accent-cyan); font-weight: 600; text-decoration: none;">artifacts/recovered.png</a>:
+            Ảnh PNG trích xuất từ dữ liệu màn hình đã giải mã của Lab13-02 (Artifact giải mã ngoại tuyến, không phải ảnh chụp full-VM).
+          </li>
+          <li>
+            <a href="artifacts/Lab13-filtered.pml" download style="color: var(--accent-cyan); font-weight: 600; text-decoration: none;">artifacts/Lab13-filtered.pml</a>:
+            Tệp sự kiện Process Monitor (.pml) đã lọc của các tiến trình Lab13.
+          </li>
+          <li>
+            <a href="artifacts/verification/verify-all.pml" download style="color: var(--accent-cyan); font-weight: 600; text-decoration: none;">Procmon phiên kiểm chứng bổ sung</a>:
+            4.724 sự kiện; <a href="artifacts/verification/verify-runtime.csv" download>CSV đối chiếu</a>.
+          </li>
+          <li>
+            <a href="analysis/runtime-verification.md" target="_blank" style="color: var(--accent-cyan); font-weight: 600; text-decoration: none;">Kết quả kiểm chứng runtime</a>:
+            Mẫu 01 tự thoát sau 30,021 giây; mẫu 02 hai WriteFile cách 10,222 giây;
+            mẫu 03 nhận 28 byte nhưng chưa có phản hồi.
+          </li>
+          <li>
+            <a href="analysis/verification-matrix.json" target="_blank" style="color: var(--accent-cyan); font-weight: 600; text-decoration: none;">Ma trận bằng chứng và phần chưa xác nhận</a>:
+            Phân biệt ảnh GUI, đối chiếu ngoại tuyến, kết luận tĩnh và giới hạn runtime.
+          </li>
+          <li>
+            <a href="artifacts/verification/recovered-verify.bmp" download style="color: var(--accent-cyan); font-weight: 600; text-decoration: none;">BMP giải mã lượt bổ sung</a>:
+            1507×906, 32 bpp, 5.461.422 byte; không phải ảnh chụp toàn màn hình VMware.
+          </li>
+          <li>
+            <a href="analysis/final-isolation.json" target="_blank" style="color: var(--accent-cyan); font-weight: 600; text-decoration: none;">Kiểm tra môi trường cuối phiên</a>:
+            Hosts/proxy đã khôi phục; mẫu và observer đã dừng; guest thử ghi share gốc bị từ chối.
+          </li>
+          <li>
+            <a href="README.md" target="_blank" style="color: var(--accent-cyan); font-weight: 600; text-decoration: none;">README.md</a>:
+            Tài liệu hướng dẫn mở bài, tóm tắt kết quả phân tích và thuyết minh nguồn gốc bằng chứng.
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section id="tab-refs" class="tab-content" role="tabpanel" aria-labelledby="tab-btn-refs">
+      <h2 class="section-title">Tài liệu Tham khảo (References)</h2>
+      <p class="section-desc">Các nguồn học liệu, giáo trình Practical Malware Analysis và tài liệu chính thống được tham chiếu trong quá trình phân tích.</p>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Tài liệu / Nguồn</th><th>Tác giả / Nhà xuất bản</th><th>Phạm vi / Chapter</th><th>Ghi chú & Liên kết</th>
+            </tr>
+          </thead>
+          <tbody id="references-table-body">
+            <tr><td colspan="4" style="text-align: center; color: var(--text-muted);">Đang tải tài liệu tham khảo...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <div class="modal-overlay" id="image-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <h3 id="modal-title">Tiêu đề bằng chứng</h3>
+          <p id="modal-meta">Mẫu: N/A | Công cụ: N/A</p>
+        </div>
+        <button class="modal-close-btn" id="modal-close" title="Đóng (Esc)" aria-label="Đóng cửa sổ xem ảnh">✕</button>
+      </div>
+      <div class="modal-body" id="modal-body-wrap">
+        <img id="modal-img" src="" alt="Bằng chứng phân tích">
+      </div>
+      <div class="modal-footer">
+        <div class="modal-footer-desc" id="modal-desc">Mô tả chi tiết bằng chứng...</div>
+        <div class="modal-zoom-controls">
+          <button class="btn-small" id="btn-zoom-in">Phóng to (+)</button>
+          <button class="btn-small" id="btn-zoom-out">Thu nhỏ (-)</button>
+          <button class="btn-small" id="btn-zoom-reset">Đặt lại (100%)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="report-data.js"></script>
+  <script>
+    (function() {
+      function escapeHtml(str) {
+        if (str === null || str === undefined) return '';
+        const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
+        return String(str).replace(/[&<>"']/g, m => map[m]);
+      }
+      function initTabs() {
+        const navInner = document.getElementById('nav-inner');
+        navInner.addEventListener('click', (e) => {
+          const tabBtn = e.target.closest('.nav-tab');
+          if (!tabBtn) return;
+          activateTab(tabBtn.getAttribute('data-tab'));
+        });
+        navInner.addEventListener('keydown', (e) => {
+          const tabBtn = e.target.closest('.nav-tab');
+          if (!tabBtn) return;
+          const tabs = Array.from(navInner.querySelectorAll('.nav-tab'));
+          const idx = tabs.indexOf(tabBtn);
+          if (e.key === 'ArrowRight') {
+            const next = tabs[(idx + 1) % tabs.length];
+            next.focus();
+            activateTab(next.getAttribute('data-tab'));
+          } else if (e.key === 'ArrowLeft') {
+            const prev = tabs[(idx - 1 + tabs.length) % tabs.length];
+            prev.focus();
+            activateTab(prev.getAttribute('data-tab'));
+          }
+        });
+      }
+      function activateTab(targetId) {
+        const tabs = document.querySelectorAll('.nav-tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabs.forEach(t => {
+          const match = t.getAttribute('data-tab') === targetId;
+          t.classList.toggle('active', match);
+          t.setAttribute('aria-selected', match ? 'true' : 'false');
+        });
+        tabContents.forEach(tc => {
+          tc.classList.toggle('active', tc.id === targetId);
+        });
+        const activePanel = document.getElementById(targetId);
+        if (activePanel) activePanel.scrollIntoView({ block: 'start' });
+      }
+      function followReadingLink() {
+        const target = document.getElementById(window.location.hash.slice(1));
+        if (!target) return;
+        const panel = target.closest('.tab-content');
+        if (!panel) return;
+        activateTab(panel.id);
+        target.scrollIntoView({ block: 'start' });
+      }
+      window.addEventListener('hashchange', followReadingLink);
+      document.addEventListener('click', (event) => {
+        const link = event.target.closest('a[href^="#"]');
+        if (!link) return;
+        const href = link.getAttribute('href');
+        if (href === window.location.hash) {
+          event.preventDefault();
+          followReadingLink();
+        }
+      });
+      const modal = document.getElementById('image-modal');
+      const modalImg = document.getElementById('modal-img');
+      const modalTitle = document.getElementById('modal-title');
+      const modalMeta = document.getElementById('modal-meta');
+      const modalDesc = document.getElementById('modal-desc');
+      const modalClose = document.getElementById('modal-close');
+      const btnZoomIn = document.getElementById('btn-zoom-in');
+      const btnZoomOut = document.getElementById('btn-zoom-out');
+      const btnZoomReset = document.getElementById('btn-zoom-reset');
+      let currentZoom = 1.0;
+      let modalOpener = null;
+      function openModal(evidence) {
+        if (!evidence) return;
+        modalOpener = document.activeElement;
+        modalImg.src = evidence.imagePath || '';
+        modalTitle.textContent = evidence.title || 'Bằng chứng máy ảo';
+        const statusStr = evidence.status ? ' [' + evidence.status + ']' : '';
+        modalMeta.textContent = 'Mẫu: ' + (evidence.sampleName || evidence.sampleId || 'Chung') + ' | Công cụ: ' + (evidence.tool || 'N/A') + statusStr;
+        modalDesc.textContent = evidence.observation || evidence.description || '';
+        currentZoom = 1.0;
+        modalImg.style.transform = 'scale(' + currentZoom + ')';
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        modalClose.focus();
+      }
+      function closeModal() {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+        if (modalOpener && modalOpener.isConnected) modalOpener.focus({ preventScroll: true });
+      }
+      modalClose.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+        if (e.key === 'Tab' && modal.classList.contains('open')) {
+          const controls = Array.from(modal.querySelectorAll('button'));
+          const first = controls[0], last = controls[controls.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+      });
+      btnZoomIn.addEventListener('click', () => {
+        currentZoom = Math.min(currentZoom + 0.25, 3.0);
+        modalImg.style.transform = 'scale(' + currentZoom + ')';
+      });
+      btnZoomOut.addEventListener('click', () => {
+        currentZoom = Math.max(currentZoom - 0.25, 0.5);
+        modalImg.style.transform = 'scale(' + currentZoom + ')';
+      });
+      btnZoomReset.addEventListener('click', () => {
+        currentZoom = 1.0;
+        modalImg.style.transform = 'scale(1.0)';
+      });
+      function renderStatusBadge(status) {
+        if (!status) return '';
+        const s = String(status).toLowerCase();
+        let cls = 'pill';
+        if (s.includes('verif') || s.includes('done') || s.includes('succeed')) cls += ' pill-green';
+        else if (s.includes('stat') || s.includes('analyz')) cls += ' pill-cyan';
+        else if (s.includes('warn') || s.includes('part') || s.includes('pend') || s.includes('prog')) cls += ' pill-amber';
+        else if (s.includes('unproven') || s.includes('fail') || s.includes('block')) cls += ' pill-purple';
+        return '<span class="' + cls + '">' + escapeHtml(status) + '</span>';
+      }
+      function renderReadingSteps(steps, evidences) {
+        return steps.map((step, index) => `
+          <article class="reading-step" data-step-id="${escapeHtml(step.id)}" id="${escapeHtml(step.id)}">
+            <p class="step-label">BƯỚC ${index + 1} / ${steps.length}</p>
+            <h3>${escapeHtml(step.title)}</h3>
+            <p class="step-explanation">${escapeHtml(step.explanation)}</p>
+            ${(step.evidence || []).map(placement => {
+              const ev = evidences.find(item => item.id === placement.id);
+              if (!ev) throw new Error('Thiếu ảnh cho bước ' + step.id + ': ' + placement.id);
+              return `
+                <figure class="inline-evidence" data-evidence-id="${escapeHtml(ev.id)}" id="reading-${escapeHtml(ev.id)}">
+                  <div class="evidence-heading">
+                    <p class="evidence-meta"><span>${escapeHtml(ev.id)}</span><span>${escapeHtml(ev.tool)}</span><span>${escapeHtml(ev.kind === 'static' ? 'Phân tích tĩnh' : 'Quan sát thực nghiệm')}</span></p>
+                    <h4>${escapeHtml(ev.title)}</h4>
+                  </div>
+                  <button class="evidence-open" type="button" data-ev-id="${escapeHtml(ev.id)}" aria-label="Phóng to ${escapeHtml(ev.id)}: ${escapeHtml(ev.title)}">
+                    <img src="${escapeHtml(ev.imagePath)}" width="2560" height="1600" loading="lazy" alt="${escapeHtml(ev.id + ': ' + ev.title)}">
+                    <span>Xem ảnh gốc toàn khung · Bấm để phóng to</span>
+                  </button>
+                  <figcaption class="evidence-reading">
+                    <p><strong>Đọc ở đâu:</strong> ${escapeHtml(placement.where)}</p>
+                    <p><strong>Quan sát:</strong> ${escapeHtml(ev.observation || ev.description)}</p>
+                    <p><strong>Kết luận:</strong> ${escapeHtml(placement.conclusion)}</p>
+                  </figcaption>
+                </figure>`;
+            }).join('')}
+            ${step.record ? '<p class="runtime-record"><strong>Nguồn và giới hạn:</strong> ' + escapeHtml(step.record) + '</p>' : ''}
+            ${step.metrics ? '<dl class="runtime-metrics">' + step.metrics.map(item => '<div><dt>' + escapeHtml(item[0]) + '</dt><dd>' + escapeHtml(item[1]) + '</dd></div>').join('') + '</dl>' : ''}
+            <p class="step-takeaway"><strong>Chốt bước này:</strong> ${escapeHtml(step.takeaway)}</p>
+            ${step.narration ? '<details class="speaker-notes"><summary>Lời thuyết minh cho bước này</summary><p>' + escapeHtml(step.narration) + '</p></details>' : ''}
+          </article>
+        `).join('');
+      }
+      function renderReadingIndex(steps) {
+        return '<nav class="reading-index" aria-label="Các bước trong phần này"><h3>Trình tự đọc và thuyết minh</h3><ol>' +
+          steps.map(step => '<li><a href="#' + escapeHtml(step.id) + '">' + escapeHtml(step.title) + '</a></li>').join('') +
+          '</ol></nav>';
+      }
+      function renderApp(data) {
+        if (!data) return;
+        if (data.meta) {
+          const meta = data.meta;
+          if (meta.title) document.getElementById('app-title').textContent = meta.title;
+          if (meta.subtitle) document.getElementById('app-subtitle').textContent = meta.subtitle;
+          if (meta.folderNumber !== undefined) {
+            document.getElementById('brand-folder-num').textContent = meta.folderNumber;
+            document.getElementById('card-folder-pill').textContent = 'Folder #' + meta.folderNumber;
+          }
+          if (meta.folderPath) {
+            document.getElementById('overview-folder-path').textContent = meta.folderPath;
+          }
+          if (meta.environment) {
+            const env = meta.environment;
+            if (env.os) document.getElementById('meta-os').textContent = env.os;
+            if (env.vm) document.getElementById('meta-hypervisor').textContent = env.vm;
+            if (env.network) document.getElementById('meta-net').textContent = env.network;
+            if (env.snapshot) {
+              document.getElementById('meta-snapshot').textContent = env.snapshot;
+              const badgeSnap = document.getElementById('badge-snapshot');
+              if (badgeSnap) {
+                badgeSnap.textContent = 'Snapshot: ' + env.snapshot;
+                badgeSnap.title = 'Snapshot trước phân tích: ' + env.snapshot;
+              }
+            }
+            if (env.tools && Array.isArray(env.tools)) {
+              document.getElementById('overview-tools-list').innerHTML = env.tools.map(t => '<li><strong>' + escapeHtml(t) + '</strong></li>').join('');
+            }
+          }
+        }
+        const samples = data.samples || [];
+        const evidences = data.evidences || [];
+        const readingGuide = data.readingGuide || {};
+        const overviewSteps = readingGuide.overview || [];
+        document.getElementById('overview-reading').innerHTML = renderReadingSteps(overviewSteps, evidences);
+        const navInner = document.getElementById('nav-inner');
+        const dynamicSamplesContainer = document.getElementById('dynamic-samples-container');
+        const galleryTabBtn = document.getElementById('tab-btn-gallery');
+        const overviewTbody = document.getElementById('overview-samples-table');
+        if (samples.length) {
+          const hintEl = document.getElementById('overview-samples-hint');
+          if (hintEl) {
+            hintEl.textContent = 'Đã nạp và phân tích ' + samples.length + ' mẫu mã độc (' + samples.map(s => s.fileName).join(', ') + ').';
+          }
+          overviewTbody.innerHTML = samples.map(s => `
+            <tr>
+              <td><strong style="color: #38bdf8; font-family: var(--font-mono);">${escapeHtml(s.fileName)}</strong></td>
+              <td>${escapeHtml(s.arch || 'PE32 x86')}</td>
+              <td style="font-family: var(--font-mono);">${s.fileSize ? (s.fileSize / 1024).toFixed(1) + ' KB' : 'N/A'}</td>
+              <td>${renderStatusBadge(s.status || 'Analyzed')}</td>
+              <td style="color: var(--text-secondary);">${escapeHtml(s.role || s.overview || '')}</td>
+            </tr>
+          `).join('');
+        } else {
+          overviewTbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color: var(--text-muted);">Chưa có dữ liệu mẫu nào.</td></tr>';
+        }
+        dynamicSamplesContainer.innerHTML = '';
+        samples.forEach((sample, idx) => {
+          const tabId = 'tab-sample-' + (sample.id || idx);
+          const btnId = 'tab-btn-sample-' + (sample.id || idx);
+          let tabBtn = document.getElementById(btnId);
+          if (!tabBtn) {
+            tabBtn = document.createElement('button');
+            tabBtn.className = 'nav-tab';
+            tabBtn.id = btnId;
+            tabBtn.setAttribute('data-tab', tabId);
+            tabBtn.setAttribute('role', 'tab');
+            tabBtn.setAttribute('aria-selected', 'false');
+            tabBtn.innerHTML = '<span>' + escapeHtml(sample.fileName || sample.id) + '</span>';
+            navInner.insertBefore(tabBtn, galleryTabBtn);
+          }
+          const readingSteps = readingGuide[sample.id] || [];
+          const sec = document.createElement('section');
+          sec.id = tabId;
+          sec.className = 'tab-content';
+          sec.setAttribute('role', 'tabpanel');
+          sec.setAttribute('aria-labelledby', btnId);
+          sec.innerHTML = `
+            <div class="reading-intro">
+                <h2 class="section-title">Phân tích Chi tiết: ${escapeHtml(sample.fileName)}</h2>
+                <p>${escapeHtml(sample.overview || '')}</p>
+                <p>Đi theo các bước dưới đây. Mỗi ảnh đứng ngay sau phần giải thích, không cần mở kho bằng chứng.</p>
+                <p>
+                ${renderStatusBadge(sample.status)}
+                </p>
+            </div>
+            ${renderReadingIndex(readingSteps)}
+            ${renderReadingSteps(readingSteps, evidences)}
+            <details class="technical-details">
+            <summary>Thông tin kỹ thuật bổ sung: hash, khóa và bảng ký tự</summary>
+            <div class="grid-2">
+              <div class="card">
+                <div class="card-header"><span class="card-title">Đặc tính Nhị phân (Binary Metadata)</span><span class="pill">${escapeHtml(sample.arch || 'PE32 x86')}</span></div>
+                <div class="detail-row"><span class="detail-label">Tên File:</span><span class="detail-value">${escapeHtml(sample.fileName)}</span></div>
+                <div class="detail-row"><span class="detail-label">SHA256:</span><span class="detail-value" style="font-size: 0.75rem;">${escapeHtml(sample.sha256 || 'N/A')}</span></div>
+                <div class="detail-row"><span class="detail-label">MD5:</span><span class="detail-value" style="font-size: 0.75rem;">${escapeHtml(sample.md5 || 'N/A')}</span></div>
+                <div class="detail-row"><span class="detail-label">Kích thước:</span><span class="detail-value">${sample.fileSize ? sample.fileSize + ' bytes' : 'N/A'}</span></div>
+                <div class="detail-row"><span class="detail-label">Subsystem:</span><span class="detail-value">${escapeHtml(sample.subsystem || 'Windows GUI / Console')}</span></div>
+              </div>
+              <div class="card">
+                <div class="card-header">
+                  <span class="card-title">Cơ chế Hoạt động & Thuật toán</span>
+                  ${sample.mechanism?.keyOrTable ? '<span class="pill pill-amber">Key / Table</span>' : ''}
+                </div>
+                <p>${escapeHtml(sample.mechanism?.algorithm || '')}</p>
+                ${sample.mechanism?.keyOrTable ? `
+                  <div style="margin-top: 0.5rem;">
+                    <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; margin-bottom: 0.25rem;">BẢNG / KHOÁ TRÍCH XUẤT:</div>
+                    <div class="code-box" style="margin: 0;">${escapeHtml(sample.mechanism.keyOrTable)}</div>
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+            </details>
+            ${sample.mechanism?.disassemblySnippet ? `
+              <details class="technical-details">
+                <summary>
+                  Đối chiếu chuyên sâu: ${escapeHtml(sample.mechanism.snippetLabel || 'trích đoạn mã máy')}
+                </summary>
+                <div class="code-box" style="margin-top: 0.5rem;">${escapeHtml(sample.mechanism.disassemblySnippet)}</div>
+              </details>
+            ` : ''}
+            <nav class="page-navigation" aria-label="Phần trước và phần tiếp theo">
+              <a href="#${idx ? 'tab-sample-' + escapeHtml(samples[idx - 1].id) : 'tab-overview'}">Phần trước: ${escapeHtml(idx ? samples[idx - 1].fileName : 'Bắt đầu')}</a>
+              <a href="#${idx < samples.length - 1 ? 'tab-sample-' + escapeHtml(samples[idx + 1].id) : 'tab-iocs'}">Đọc tiếp: ${escapeHtml(idx < samples.length - 1 ? samples[idx + 1].fileName : 'Kết luận chung & IOC')}</a>
+            </nav>
+          `;
+          dynamicSamplesContainer.appendChild(sec);
+        });
+        navInner.appendChild(galleryTabBtn);
+        document.getElementById('evidence-count').textContent = evidences.length;
+        renderGallery(evidences);
+        const toolSet = new Set();
+        evidences.forEach(e => { if (e.tool) toolSet.add(e.tool.trim()); });
+        const filterWrap = document.getElementById('gallery-filter-wrap');
+        filterWrap.innerHTML = '<button class="btn-small filter-btn active" data-filter="all">Tất cả (' + evidences.length + ')</button>';
+        toolSet.forEach(tool => {
+          const count = evidences.filter(e => e.tool === tool).length;
+          filterWrap.innerHTML += '<button class="btn-small filter-btn" data-filter="' + escapeHtml(tool) + '">' + escapeHtml(tool) + ' (' + count + ')</button>';
+        });
+        filterWrap.querySelectorAll('.filter-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            filterWrap.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filterVal = btn.getAttribute('data-filter');
+            if (filterVal === 'all') {
+              renderGallery(evidences);
+            } else {
+              renderGallery(evidences.filter(e => e.tool && e.tool.trim().toLowerCase() === filterVal.toLowerCase()));
+            }
+          });
+        });
+        const iocTbody = document.getElementById('ioc-table-body');
+        const iocs = data.iocs || [];
+        if (iocs.length) {
+          iocTbody.innerHTML = iocs.map(ioc => {
+            const sev = ioc.severity || 'Medium';
+            const sevColor = sev === 'High' ? 'var(--accent-red)' : (sev === 'Medium' ? 'var(--accent-amber)' : 'var(--accent-cyan)');
+            return `
+              <tr>
+                <td><span class="pill">${escapeHtml(ioc.type || 'Indicator')}</span></td>
+                <td><strong style="color: #38bdf8; font-family: var(--font-mono);">${escapeHtml(ioc.sample || 'Chung')}</strong></td>
+                <td><code style="background: #030712; padding: 0.2rem 0.4rem; border-radius: 4px; font-family: var(--font-mono); color: #a3e635;">${escapeHtml(ioc.indicator)}</code></td>
+                <td style="color: var(--text-secondary);">${escapeHtml(ioc.context || '')}</td>
+                <td><span style="color: ${sevColor}; font-weight: 700;">${escapeHtml(sev)}</span></td>
+              </tr>
+            `;
+          }).join('');
+        } else {
+          iocTbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--text-muted);">Chưa có mục IOC nào được ghi nhận.</td></tr>';
+        }
+        const yaraSection = document.getElementById('yara-rules-section');
+        const yaraContent = document.getElementById('yara-rule-content');
+        if (data.yaraRule || data.yaraRules) {
+          yaraSection.style.display = 'block';
+          yaraContent.textContent = data.yaraRule || (Array.isArray(data.yaraRules) ? data.yaraRules.join('\n\n') : String(data.yaraRules));
+        } else {
+          yaraSection.style.display = 'none';
+        }
+        const reproContainer = document.getElementById('repro-steps-container');
+        const steps = data.reproduction || data.steps || [];
+        if (steps.length) {
+          reproContainer.innerHTML = steps.map((st, idx) => `
+            <div class="step-item">
+              <div class="step-num">${escapeHtml(st.step || (idx + 1))}</div>
+              <div class="step-content">
+                <h4>${escapeHtml(st.title || ('Bước ' + (idx + 1)))}</h4>
+                <p>${escapeHtml(st.action || st.description || '')}</p>
+                ${st.expectation ? '<p style="margin-top: 0.25rem; color: var(--accent-cyan);"><strong>Kỳ vọng:</strong> ' + escapeHtml(st.expectation) + '</p>' : ''}
+              </div>
+            </div>
+          `).join('');
+        } else {
+          reproContainer.innerHTML = '<p style="color: var(--text-muted); font-size: 0.85rem;">Quy trình tái lập đang được cập nhật.</p>';
+        }
+        const limitsContainer = document.getElementById('limitations-container');
+        const limitations = data.limitations || [];
+        if (limitations.length) {
+          limitsContainer.innerHTML = limitations.map(lim => '<li style="margin-bottom: 0.5rem;">' + escapeHtml(lim) + '</li>').join('');
+        } else {
+          limitsContainer.innerHTML = '<li>Chưa có giới hạn đặc biệt nào được ghi nhận.</li>';
+        }
+        const refsTbody = document.getElementById('references-table-body');
+        const refs = data.references || [];
+        if (refs.length) {
+          refsTbody.innerHTML = refs.map(ref => `
+            <tr>
+              <td><strong>${escapeHtml(ref.title || 'Tài liệu')}</strong></td>
+              <td>${escapeHtml(ref.author || 'N/A')}</td>
+              <td><span class="pill pill-cyan">${escapeHtml(ref.chapter || ref.scope || 'General')}</span></td>
+              <td style="color: var(--text-secondary);">
+                ${escapeHtml(ref.note || '')}
+                ${ref.url ? '<br><a href="' + escapeHtml(ref.url) + '" target="_blank" rel="noopener noreferrer" style="color: var(--accent-cyan); font-size: 0.775rem;">' + escapeHtml(ref.url) + '</a>' : ''}
+              </td>
+            </tr>
+          `).join('');
+        } else {
+          refsTbody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: var(--text-muted);">Chưa có danh mục tài liệu tham khảo.</td></tr>';
+        }
+        followReadingLink();
+      }
+      function renderGalleryCardHtml(ev) {
+        const toolCls = (ev.tool || '').toLowerCase().replace(/[^a-z]/g, '');
+        return `
+          <div class="gallery-entry">
+          <div class="gallery-card" data-ev-id="${escapeHtml(ev.id)}" role="button" tabindex="0" aria-label="Xem bằng chứng: ${escapeHtml(ev.title)}">
+            <div class="gallery-thumb-wrap">
+              <img src="${escapeHtml(ev.imagePath || '')}" alt="${escapeHtml(ev.title || 'Bằng chứng')}" loading="lazy">
+              <span class="gallery-tool-tag ${toolCls}">${escapeHtml(ev.tool || 'Tool')}</span>
+            </div>
+            <div class="gallery-info">
+              <div class="gallery-sample-badge">
+                ${escapeHtml(ev.sampleName || ev.sampleId || 'Chung')}
+                ${ev.status ? ' • ' + escapeHtml(ev.status) : ''}
+              </div>
+              <div class="gallery-title">${escapeHtml(ev.title || 'Bằng chứng')}</div>
+              <div class="gallery-desc">${escapeHtml(ev.observation || ev.description || '')}</div>
+              <div class="gallery-footer">
+                <span>Công cụ: ${escapeHtml(ev.tool || 'Tool')}</span>
+                <span>Phóng to ↗</span>
+              </div>
+            </div>
+          </div>
+          <a class="gallery-context-link" href="#reading-${escapeHtml(ev.id)}">Đọc giải thích tại đúng vị trí của ảnh</a>
+          </div>
+        `;
+      }
+      function renderGallery(items) {
+        const galleryContainer = document.getElementById('gallery-container');
+        if (!items || !items.length) {
+          galleryContainer.innerHTML = '<p style="color: var(--text-muted); font-size: 0.85rem; grid-column: 1 / -1;">Không tìm thấy bằng chứng nào phù hợp với bộ lọc.</p>';
+          return;
+        }
+        galleryContainer.innerHTML = items.map(ev => renderGalleryCardHtml(ev)).join('');
+      }
+      // Robust Event Delegation: guarantees modals work across all tabs and dynamic filters
+      document.addEventListener('click', (e) => {
+        if (e.target.closest('.gallery-context-link')) return;
+        const card = e.target.closest('.gallery-card, .evidence-open');
+        if (card) {
+          const evId = card.getAttribute('data-ev-id');
+          const allEvs = (window.LAB13 && window.LAB13.evidences) || [];
+          const found = allEvs.find(x => x.id === evId);
+          if (found) openModal(found);
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          if (e.target.closest('.gallery-context-link, .evidence-open')) return;
+          const card = document.activeElement ? document.activeElement.closest('.gallery-card') : null;
+          if (card) {
+            e.preventDefault();
+            const evId = card.getAttribute('data-ev-id');
+            const allEvs = (window.LAB13 && window.LAB13.evidences) || [];
+            const found = allEvs.find(x => x.id === evId);
+            if (found) openModal(found);
+          }
+        }
+      });
+
+      initTabs();
+      if (window.LAB13) {
+        renderApp(window.LAB13);
+      } else {
+        let pollCount = 0;
+        const interval = setInterval(() => {
+          pollCount++;
+          if (window.LAB13) {
+            clearInterval(interval);
+            renderApp(window.LAB13);
+          } else if (pollCount > 40) {
+            clearInterval(interval);
+          }
+        }, 150);
+      }
+    })();
+  </script>
+</body>
+</html>

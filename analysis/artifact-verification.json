@@ -1,0 +1,48 @@
+{
+  "verifiedAt": "2026-11-02T18:49:54.554560+07:00",
+  "screenshots": {
+    "count": 25,
+    "size": [
+      2560,
+      1600
+    ],
+    "uncroppedSourceFiles": true
+  },
+  "encryptedArtifact": {
+    "size": 5436114,
+    "sha256": "633720a43522d4b32da5bc0c67ae3d03c7ce0253d7f4cd0a1b3f90321d79a511",
+    "prefix": "e2 ee 44 de 21 cc 46 27 34 ed 92 74 f1 60 f6 42"
+  },
+  "recoveredBMP": {
+    "size": 5436114,
+    "sha256": "88fba817db49d0d44f1da20c30ca4d18bff9217a1ed7e2be2ed36b3b34882a0c",
+    "width": 1505,
+    "height": 903,
+    "bpp": 32,
+    "independentPlaintextBaseline": false,
+    "pngPixelsMatchBmp": true
+  },
+  "http": {
+    "count": 2,
+    "path": "/REVTS1RPUC1WNVZD/",
+    "intervalSeconds": 30.606385231018066,
+    "target": "local loopback only"
+  },
+  "shell": {
+    "parentPID": 4336,
+    "childPID": 4532,
+    "remoteAddress": "127.0.0.1",
+    "remotePort": 8910,
+    "state": "Established",
+    "commandsSent": 0,
+    "passiveReceivedBytes": 0
+  },
+  "cleanup": "hosts and proxy restored; samples and observer absent; controller exited; transfer share removed; NIC disconnected; power-on autoconnect disabled",
+  "limits": "Offline artifact checks; not live Internet C2 or interactive shell proof",
+  "historical": true,
+  "supersededBy": [
+    "analysis/runtime-verification.json",
+    "analysis/screenshot-provenance.json",
+    "analysis/final-isolation.json"
+  ]
+}

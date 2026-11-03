@@ -1,0 +1,50 @@
+﻿{
+    "pid":  5672,
+    "processes":  [
+                      {
+                          "Name":  "Lab13-03.exe",
+                          "ProcessId":  5672,
+                          "ParentProcessId":  1280,
+                          "CommandLine":  "\"C:\\Lab13Analysis\\samples\\Lab13-03.exe\" "
+                      },
+                      {
+                          "Name":  "conhost.exe",
+                          "ProcessId":  5608,
+                          "ParentProcessId":  5672,
+                          "CommandLine":  "\\??\\C:\\Windows\\system32\\conhost.exe 0x4"
+                      },
+                      {
+                          "Name":  "cmd.exe",
+                          "ProcessId":  1296,
+                          "ParentProcessId":  5672,
+                          "CommandLine":  "cmd.exe"
+                      }
+                  ],
+    "connections":  [
+                        {
+                            "LocalAddress":  "127.0.0.1",
+                            "LocalPort":  49777,
+                            "RemoteAddress":  "127.0.0.1",
+                            "RemotePort":  8910,
+                            "State":  5,
+                            "OwningProcess":  5672
+                        },
+                        {
+                            "LocalAddress":  "127.0.0.1",
+                            "LocalPort":  8910,
+                            "RemoteAddress":  "127.0.0.1",
+                            "RemotePort":  49777,
+                            "State":  5,
+                            "OwningProcess":  5448
+                        },
+                        {
+                            "LocalAddress":  "127.0.0.1",
+                            "LocalPort":  8910,
+                            "RemoteAddress":  "0.0.0.0",
+                            "RemotePort":  0,
+                            "State":  2,
+                            "OwningProcess":  5448
+                        }
+                    ],
+    "start":  "2026-11-02T20:40:41.1880976+07:00"
+}

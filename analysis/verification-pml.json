@@ -1,0 +1,11 @@
+{
+  "verifiedAt": "2026-11-02T21:16:27.086610+07:00",
+  "path": "artifacts/verification/verify-all.pml",
+  "bytes": 2301518,
+  "sha256": "626065d1be7c314167ba6eb823008c61f31cfedd3a6480aa80ea0e899031c6ab",
+  "magic": "PML_",
+  "version": 9,
+  "eventCountAt0x234": 4724,
+  "csvRows": 4724,
+  "limits": "Procmon GUI export; header/CSV checked, not independent full PML parser."
+}

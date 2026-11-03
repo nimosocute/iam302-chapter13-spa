@@ -1,0 +1,99 @@
+==================================================
+   MALWARE ANALYSIS SPA - RENDER & INTEGRITY QA   
+==================================================
+Target index.html : D:\FPT University\FA26\IAM302\Lab13_SPA\index.html
+Report data path  : D:\FPT University\FA26\IAM302\Lab13_SPA\report-data.js
+Artifacts preview : D:\FPT University\FA26\IAM302\Lab13_SPA\artifacts\spa_ui_preview.png
+QA Results Log    : D:\FPT University\FA26\IAM302\Lab13_SPA\analysis\qa-final-results.txt
+--------------------------------------------------
+[PASS] 1. Zero External Dependencies in HTML source (100% Offline Capable)
+[PASS] 2. Zero External HTTP(S) Network Requests Captured at Load (3 local requests)
+[PASS] 3. Zero JavaScript Runtime & Console Errors at Load
+[PASS] 4. Title Rendered: 'Chapter 13 — Phân tích Malware & Bằng chứng'
+[PASS] 5. Responsive Layout Verified across all 8 tabs (Zero Overflow & Zero BoundingRect Clipping on 390x844 Mobile)
+[PASS] 6. Navigation Tabs Rendered (8): ['Bắt đầu', 'Lab13-01.exe', 'Lab13-02.exe', 'Lab13-03.exe', 'Kết luận & IOC', 'Quy trình & Giới hạn', 'Tham khảo', 'Chỉ mục ảnh (tra cứu thêm)36']
+[PASS] 7. Accessibility Keyboard Navigation Verified (ArrowRight/ArrowLeft tab switching)
+[PASS] 8. All Individual Sample Tabs Switch Accurately
+[PASS] 9. References Section Operational (1799 chars)
+--------------------------------------------------
+RENDER & INTEGRITY DATA SUMMARY:
+   - Samples count     : 3
+     * Lab13-01.exe: Single-byte XOR (Key 0x3B) + Standard Base64 (3 findings)
+     * Lab13-02.exe: Rabbit Stream Cipher (Biến thể hằng số 0x4D34D35D, Zero-State 68B) (4 findings)
+     * Lab13-03.exe: Inbound: Custom Base64 (Shift-2) | Outbound: AES-128-CBC (4 findings)
+   - IOC indicators    : 6
+   - Reproduction steps: 6
+   - Limitations items : 10
+   - Evidences count   : 36
+     [OK] EVID-02: evidence/02-ida-lab01-xor3b.png (IDA Pro 9.4)
+     [OK] EVID-03: evidence/03-ida-lab01-decompiler-xor.png (Hex-Rays Decompiler (IDA Pro 9.4))
+     [OK] EVID-04: evidence/04-ida-lab01-http-hostname.png (IDA Pro 9.4)
+     [OK] EVID-05: evidence/05-procmon-process-filter.png (Process Monitor v3.96)
+     [OK] EVID-06: evidence/06-procmon-lab02-runtime.png (Process Monitor v3.96)
+     [OK] EVID-07: evidence/07-procmon-lab02-writefile.png (Process Monitor v3.96)
+     [OK] EVID-08: evidence/08-procmon-lab02-writefile-filtered.png (Process Monitor v3.96)
+     [OK] EVID-09: evidence/09-burp-lab01-http-request.png (Burp Suite Professional v2023.4.2)
+     [OK] EVID-10: evidence/10-ida-lab02-screen-capture.png (Hex-Rays Decompiler (IDA Pro 9.4))
+     [OK] EVID-11: evidence/11-ida-lab02-encrypt-write.png (Hex-Rays Decompiler (IDA Pro 9.4))
+     [OK] EVID-12: evidence/12-ida-lab02-rabbit-constants.png (Hex-Rays Decompiler (IDA Pro 9.4))
+     [OK] EVID-13: evidence/13-ida-lab03-c2-connect.png (Hex-Rays Decompiler (IDA Pro 9.4))
+     [OK] EVID-14: evidence/14-ida-lab03-pipes-cmd.png (Hex-Rays Decompiler (IDA Pro 9.4))
+     [OK] EVID-15: evidence/15-ida-lab03-outbound-encryption.png (Hex-Rays Decompiler (IDA Pro 9.4))
+     [OK] EVID-16: evidence/16-ida-lab03-inbound-decode.png (Hex-Rays Decompiler (IDA Pro 9.4))
+     [OK] EVID-18: evidence/18-procmon-lab03-cmd-child.png (Process Monitor v3.96)
+     [OK] EVID-19: evidence/19-hxd-lab02-encrypted-file.png (HxD Hex Editor)
+     [OK] EVID-20: evidence/20-hxd-lab02-decrypted-bmp.png (HxD Hex Editor)
+     [OK] EVID-21: evidence/21-paint-lab02-recovered-screen.png (Microsoft Paint)
+     [OK] EVID-22: evidence/22-procmon-cmd-process-properties.png (Process Monitor v3.96)
+     [OK] EVID-23: evidence/23-hashmyfiles-samples.png (HashMyFiles (NirSoft))
+     [OK] EVID-24: evidence/24-processhacker-live-lab03.png (Process Hacker)
+     [OK] EVID-25: evidence/25-processhacker-live-tcp8910.png (Process Hacker)
+     [OK] EVID-26: evidence/26-ida-lab03-createpipes.png (Hex-Rays Decompiler (IDA Pro 9.4))
+     [OK] EVID-27: evidence/27-ida-lab03-redirect-createprocess.png (Hex-Rays Decompiler (IDA Pro 9.4))
+     [OK] EVID-28: evidence/28-ida-lab01-loop-exit-delay.png (Hex-Rays Decompiler (IDA Pro 9.4))
+     [OK] EVID-29: evidence/29-ida-lab01-response-o.png (Hex-Rays Decompiler (IDA Pro 9.4))
+     [OK] EVID-30: evidence/30-ida-lab01-base64-alphabet.png (IDA Pro 9.4)
+     [OK] EVID-31: evidence/31-ida-lab01-response-o-comparison.png (Hex-Rays Decompiler (IDA Pro 9.4))
+     [OK] EVID-32: evidence/32-burp-lab01-response-o.png (Burp Suite Professional v2023.4.2)
+     [OK] EVID-33: evidence/33-ida-lab02-sleep5000.png (Hex-Rays Decompiler (IDA Pro 9.4))
+     [OK] EVID-34: evidence/34-ida-lab02-zero-state.png (Hex-Rays Decompiler (IDA Pro 9.4))
+     [OK] EVID-35: evidence/35-ida-lab03-cbc-feedback.png (Hex-Rays Decompiler (IDA Pro 9.4))
+     [OK] EVID-36: evidence/36-ida-lab03-custom-base64.png (IDA Pro 9.4)
+     [OK] EVID-37: evidence/37-procmon-lab01-natural-exit.png (Process Monitor v3.96)
+     [OK] EVID-38: evidence/38-procmon-lab02-ten-second-interval.png (Process Monitor v3.96)
+[PASS] 10a. All 36 actual evidence image files exist on disk.
+[PASS] 10b. All 36 Gallery Images Eagerly Decoded (naturalWidth/Height > 0, uncropped object-fit: contain)
+[PASS] 10c. All 9 Gallery Filter Buttons Verified (Accurate Card Counts)
+[PASS] 10d. Modal Verified: Keyboard Enter Open, Escape Close, Zoom Controls (+0.25 -> 1.25) & Auto-Reset
+       Verifying modal rendering on all 36 evidence cards...
+[PASS] 10e. Comprehensive Modal Check Passed (All 36 Evidence Items Open, Decode & Close cleanly)
+[PASS] 10f. Sample Assembly <details> Containers Verified (Default collapsed, clean expand & collapse)
+       [OK Link] artifacts/recovered.png -> 138186 bytes
+       [OK Link] artifacts/Lab13-filtered.pml -> 2597511 bytes
+       [OK Link] artifacts/verification/verify-all.pml -> 2301518 bytes
+       [OK Link] artifacts/verification/verify-runtime.csv -> 1248359 bytes
+       [OK Link] analysis/runtime-verification.md -> 8678 bytes
+       [OK Link] analysis/verification-matrix.json -> 5400 bytes
+       [OK Link] artifacts/verification/recovered-verify.bmp -> 5461422 bytes
+       [OK Link] analysis/final-isolation.json -> 635 bytes
+       [OK Link] README.md -> 7530 bytes
+[PASS] 10g. All Artifacts & README Links Validated on Local Disk
+[PASS] 10h. Zero Double-Escaping or Raw Entity Strings Detected
+       Found 20 article.reading-step elements (expected: 20)
+       Found 36 inline evidence figures across reading steps
+[PASS]       All 36 inline evidence images eagerly decoded at full uncropped 2560x1600 resolution
+[PASS]       All 36 gallery-context-link routing verified: correct tab activation, target resolved, zero modal trigger
+       [OK Probe] Modal opened, src verified & closed with focus restored on #tab-overview (EVID-23)
+       [OK Probe] Modal opened, src verified & closed with focus restored on #tab-sample-lab13-01 (EVID-02)
+       [OK Probe] Modal opened, src verified & closed with focus restored on #tab-sample-lab13-02 (EVID-10)
+       [OK Probe] Modal opened, src verified & closed with focus restored on #tab-sample-lab13-03 (EVID-13)
+[PASS] 10i. Behavioral Check: All 36 Accepted Evidence Items Placed Inline with Context & Modal Verified
+[PASS] 11a. UI Layout Preview (Overview Desktop) Saved: D:\FPT University\FA26\IAM302\Lab13_SPA\artifacts\spa_ui_preview.png
+       -> Host visualization: C:\Users\vanba\.codex\visualizations\2026\11\02\01a19bb5-17d4-7e30-8fb5-d18a2c8dfbdb\spa_overview_desktop.png
+[PASS] 11b. Sample 02 Desktop Preview Saved: C:\Users\vanba\.codex\visualizations\2026\11\02\01a19bb5-17d4-7e30-8fb5-d18a2c8dfbdb\spa_sample02_desktop.png
+[PASS] 11c. Gallery Desktop Preview Saved: C:\Users\vanba\.codex\visualizations\2026\11\02\01a19bb5-17d4-7e30-8fb5-d18a2c8dfbdb\spa_gallery_desktop.png
+[PASS] 11d. Mobile 390px Preview Saved: C:\Users\vanba\.codex\visualizations\2026\11\02\01a19bb5-17d4-7e30-8fb5-d18a2c8dfbdb\spa_mobile_390px.png
+[PASS] 12. Final Lifecycle Audit Passed: 0 External Requests, 0 Console Errors, 0 Page Errors
+==================================================
+>>> ALL QA TESTS PASSED: OFFLINE SPA UI CHECKS COMPLETED <<<
+==================================================
